@@ -1,4 +1,4 @@
-import { usePosts } from "../context/PosterrContext";
+import { usePosts } from "../../context/PosterrContext";
 
 function PostsSearch() {
     const { searchQuery, setSearchQuery } = usePosts();

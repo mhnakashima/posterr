@@ -1,14 +1,19 @@
-import { createContext, useContext, useMemo, useState } from "react";
 import { faker } from "@faker-js/faker";
+import { createContext, useContext, useMemo, useState } from "react";
 
 function createRandomPost() {
   return {
     title: `${faker.hacker.adjective()} ${faker.hacker.noun()}`,
     body: faker.hacker.phrase(),
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    userId: faker.datatype.uuid(),
   };
 }
 
-// 1) CREATE A CONTEXT
+/*
+  Context creation
+*/
 const PostContext = createContext();
 
 function PostProvider({ children }) {

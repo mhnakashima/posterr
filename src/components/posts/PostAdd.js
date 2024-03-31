@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { usePosts } from "../context/PosterrContext";
+import { usePosts } from "../../context/PosterrContext";
 
 function PostAdd() {
     const { onAddPost } = usePosts();

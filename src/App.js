@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Footer from "./components/Footer";
-import Header from "./components/Header";
-import PostContainer from "./containers/PostContainer";
+import PostPage from "./components/pages/PostPage";
 import { PostProvider } from "./context/PosterrContext";
 
 function App() {
@@ -25,8 +24,7 @@ function App() {
       </button>
 
       <PostProvider>
-        <Header />
-        <PostContainer />
+        <PostPage />
         <Footer />
       </PostProvider>
     </section>

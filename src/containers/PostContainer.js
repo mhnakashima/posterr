@@ -1,7 +1,7 @@
 import { memo } from "react";
 
-import Posts from "../components/Posts";
-import PostAdd from './../components/PostAdd';
+import Posts from "../components/posts/Posts";
+import PostAdd from '../components/posts/PostAdd';
 
 const PostContainer = memo(
     function PostContainer() {
