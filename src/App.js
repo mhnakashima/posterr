@@ -6,6 +6,7 @@ import { PostProvider } from "./context/PosterrContext";
 function App() {
   // Whenever `isFakeDark` changes, we toggle the `fake-dark-mode` class on the HTML element (see in "Elements" dev tool).
   const [isFakeDark, setIsFakeDark] = useState(false);
+  const [isTestingPosterr] = useState(process.env.POSTERR_IS_TESTING);
 
   useEffect(
     function () {
@@ -23,7 +24,7 @@ function App() {
         {isFakeDark ? "☀️" : "🌙"}
       </button>
 
-      <PostProvider>
+      <PostProvider isTestingPosterr>
         <PostPage />
         <Footer />
       </PostProvider>

@@ -1,3 +1,6 @@
+@import './assets/scss/utils.scss';
+@import './assets/scss/main.scss';
+
 * {
   padding: 0;
   margin: 0;
@@ -136,21 +139,7 @@ h3 {
   color: #333;
 }
 
-main ul {
-  list-style: none;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 32px;
-}
 
-main li {
-  border: 1px solid #ffe8cc;
-  padding: 16px 20px;
-}
-
-main li:hover {
-  background-color: #fff4e6;
-}
 
 aside ul {
   font-size: 90%;

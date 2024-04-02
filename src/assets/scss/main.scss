@@ -1,0 +1,17 @@
+main {
+  ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  li {
+    border: 1px solid #ffe8cc;
+    padding: 16px 20px;
+
+    &:hover{
+        background-color: #fff4e6;
+    }
+  }
+}
