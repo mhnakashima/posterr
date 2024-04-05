@@ -4,10 +4,16 @@
 */
 
 import './post';
+import { UserPosterrInfo } from './userPosterrInfo';
 
-class User {
+interface User {
+    userId: string;
     firstName: string;
     lastName: string;
-    userId: string;
     posts: Array<Post>;
+    userPosterrInfo: UserPosterrInfo;
 }
+
+type UserId = Pick<User, "userId">;
+
+export { User, UserId };

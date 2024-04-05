@@ -1,5 +1,5 @@
-import { faker } from "@faker-js/faker";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createFakeConfiguration } from "../utils/utils";
 
 /*
   Context creation
@@ -8,12 +8,7 @@ const PostContext = createContext();
 
 function PostProvider({ children, isTestingPosterr }) {
   const [posts, setPosts] = useState([{body: '', firstName: 'User', lastName: 'Sicrano', userId: ''}]);
-  /*
-    () =>
-      Array.from({ length: 30 }, () => createRandomPost())
-    );
-  */
-
+  
   /*
     TODO = isTestingPosterr
     isTestingPosterr is a function that will create fake data 
@@ -24,8 +19,15 @@ function PostProvider({ children, isTestingPosterr }) {
     done in a future task
   */
   useEffect(() => {
-    // loads user data entry from API or LocalStorage
-  }, []);
+    if(isTestingPosterr){
+      createFakeConfiguration();
+    }
+
+    /*
+      TODO = In a real scenario we must use a API call
+      for now, we are going to use a fake configuration
+    */
+  }, [isTestingPosterr]);
 
   const [searchQuery, setSearchQuery] = useState("");
 

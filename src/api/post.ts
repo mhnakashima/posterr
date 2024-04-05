@@ -3,9 +3,12 @@
     we are not using typescript but this api files is for API reference
 */
 
-class Post{
+type PostType = {
+    typeOfPost: 'repost' | 'quote' | 'post';
+}
+
+interface Post{
     userId: string;
-    title: string;
-    postBody: string;
-    postTitle?: string;
+    postBody?: string;
+    typeOfPost: PostType;
 }

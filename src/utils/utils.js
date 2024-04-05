@@ -1,14 +1,40 @@
-function createUserData(numOfPosts) {
-    
-    const howManyPosts = numOfPosts ? numOfPosts : process.env.NODE_ENV === 'development' ? process.env.POSTERR_DEV_DEFAULT_POSTERR_NUMBER : process.env.POSTERR_PROD_DEFAULT_POSTERR_NUMBER; 
-    let userData = JSON.parse(window.localStorage.getItem(POSTERR_LOCAL_STORAGE_KEY));
+import { POSTERR_LOCAL_STORAGE_KEY, POSTERR_NUM_OF_POSTS, POSTERR_USER_POST_FAKE_RATE } from "../api/constants";
+import { faker } from '@faker-js/faker';
 
-    if(!userData){
+function createFakeConfiguration() {
+  let userData = JSON.parse(window.localStorage.getItem(POSTERR_LOCAL_STORAGE_KEY));
 
-    }
-    
-    return userData;
+  if (!userData) {
+    userData = generateFirstUserData();
   }
 
-  export { createUserData };
-  
+  return userData;
+}
+
+const generateFirstUserData = () => {
+  const user = {
+    userId: faker.datatype.uuid(),
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+  }
+
+  const posts = Array.from({length: POSTERR_NUM_OF_POSTS}, () => {
+    return {
+      userId: faker.datatype.number({min: 0, max: 100}) >= POSTERR_USER_POST_FAKE_RATE ? user.userId : faker.datatype.uuid(),
+      postBody: faker.hacker.phrase(),
+      typeOfPost: faker.helpers.arrayElement(['repost', 'quote', 'post'])
+    }
+  });
+
+  const userPosterrInfo = {
+    joinedDate: faker.date.between('2022-01-01T00:00:00.000Z', Date.now()),
+    following: posts.filter(post => user.userId !== post.userId).map(post => post.userId),
+    followers: posts.filter(post => user.userId !== post.userId).map(post => post.userId),
+  }
+
+  return {
+    ...user, posts, userPosterrInfo
+  }
+}
+
+export { createFakeConfiguration };
