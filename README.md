@@ -36,8 +36,6 @@
 
 - Only alphanumeric characters can be used for username
 - Maximum 14 characters for username
-- Do not build authentication
-- Do not build user creation/editing/deletion, users should be read-only
 - When/if necessary to make your application function, you may hard-code the default user. For example, you may need to do this to implement creating new posts from the home page, following, etc
 
 **Posts**

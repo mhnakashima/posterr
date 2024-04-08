@@ -1,3 +1,4 @@
+@import './assets/scss/tailwind.scss';
 @import './assets/scss/utils.scss';
 @import './assets/scss/main.scss';
 
@@ -76,16 +77,11 @@ header div {
   align-items: center;
 }
 
-header button {
-  font-size: 14px;
-}
-
 form {
   padding: 24px;
   background-color: #fff4e6;
   display: flex;
   gap: 24px;
-  margin-bottom: 40px;
 }
 
 main {
@@ -98,8 +94,7 @@ aside {
 }
 
 input,
-textarea,
-button {
+textarea{
   font-size: 16px;
   padding: 8px 12px;
   border: 1px solid #ffe8cc;
@@ -125,22 +120,6 @@ textarea {
   height: 50px;
 }
 
-button {
-  border: 1px solid #ffa94d;
-  background-color: #ffa94d;
-  font-weight: 700;
-  padding: 9px 24px;
-  cursor: pointer;
-}
-
-h3 {
-  text-transform: capitalize;
-  margin-bottom: 16px;
-  color: #333;
-}
-
-
-
 aside ul {
   font-size: 90%;
   list-style: none;
@@ -157,11 +136,3 @@ aside li {
   align-items: center;
 }
 
-h2 + button {
-  margin-bottom: 24px;
-}
-
-aside li button {
-  padding: 4px 8px;
-  font-size: 14px;
-}
