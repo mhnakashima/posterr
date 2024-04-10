@@ -8,6 +8,8 @@ function createFakeConfiguration() {
     userData = generateFirstUserData();
   }
 
+  console.log('userData', userData);
+
   return userData;
 }
 
@@ -27,7 +29,15 @@ const generateFirstUserData = () => {
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         isFollower: faker.datatype.boolean(),
-        isFollowing: faker.datatype.boolean()
+        isFollowing: faker.datatype.boolean(),
+        numOfFollowers: faker.datatype.number({min: 0, max: 99999}),
+        numOfFollowing: faker.datatype.number({min: 0, max: 99999}),
+        posts: Array.from({length: POSTERR_NUM_OF_POSTS}, () => {
+          return {
+            postBody: faker.hacker.phrase(),
+            typeOfPost: faker.helpers.arrayElement(['repost', 'quote', 'post'])
+          }
+        }),
       }
     }
   });
@@ -37,4 +47,9 @@ const generateFirstUserData = () => {
   }
 }
 
-export { createFakeConfiguration };
+const getInitials = (firstName, lastName) => {
+  return `${firstName.charAt(0)}${lastName.charAt(0)}`;
+};
+
+
+export { createFakeConfiguration, getInitials };

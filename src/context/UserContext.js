@@ -66,6 +66,7 @@ function UserProvider({ user, children, isTestingPosterr }) {
   const value = useMemo(() => {
     return {
       posts: searchedPosts,
+      profileInfo: user,
       onAddPost: handleAddPost,
       onClearPosts: handleClearPosts,
       searchQuery,
