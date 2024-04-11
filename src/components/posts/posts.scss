@@ -1,0 +1,9 @@
+.post{
+    &-toogle{
+        &-link{
+            &.isDisabled{
+                cursor: default;
+            }
+        }
+    }
+}

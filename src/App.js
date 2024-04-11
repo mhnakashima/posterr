@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { POSTERR_IS_TESTING } from "./api/constants";
 import Footer from "./components/Footer";
 import PostPage from "./components/pages/PostPage";
 import { UserProvider } from "./context/UserContext";
-import { POSTERR_IS_TESTING } from "./api/constants";
-import { BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom";
 import { createFakeConfiguration } from "./utils/utils";
 
-function App() {
+const App = () => {
   // Whenever `isFakeDark` changes, we toggle the `fake-dark-mode` class on the HTML element (see in "Elements" dev tool).
   const [isFakeDark, setIsFakeDark] = useState(false);
   const [isTestingPosterr] = useState(POSTERR_IS_TESTING);

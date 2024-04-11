@@ -6,11 +6,11 @@
 
 **Homepage**
 
-- The homepage, by default, will show a feed of all posts, from all users
-- There is a toggle switch "All / following" that allows you to switch between seeing all posts and just posts by those you follow. For both views, all kinds of posts are expected on the feed (regular posts, reposts, and quote posts).
+- The homepage, by default, will show a feed of all posts, from all users - ok
+- There is a toggle switch "All / following" that allows you to switch between seeing all posts and just posts by those you follow. For both views, all kinds of posts are expected on the feed (regular posts, reposts, and quote posts) - ok
     - The URL should change when toggling between  "All / following"
-    - If you open the page fresh, by typing the URL for "All" or "Following" in the browser, it should show the properly unfiltered or filtered page.
-- New posts can be written from this page.
+    - If you open the page fresh, by typing the URL for "All" or "Following" in the browser, it should show the properly unfiltered or filtered page. ok
+- New posts can be written from this page. ok
 
 **User profile page**
 

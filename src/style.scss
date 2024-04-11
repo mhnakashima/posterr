@@ -1,6 +1,8 @@
 @import './assets/scss/tailwind.scss';
-@import './assets/scss/utils.scss';
 @import './assets/scss/main.scss';
+
+/* Post */
+@import './components/posts/posts.scss';
 
 * {
   padding: 0;

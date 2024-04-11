@@ -1,6 +1,6 @@
 import { usePosts } from "../context/UserContext";
 
-function Results() {
+const Results = () => {
     const { posts } = usePosts();
 
     return <p>🚀 {posts.length} Posterr found</p>;

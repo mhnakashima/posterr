@@ -12,9 +12,9 @@ const Modal = ({ isOpen, onClose, children }) => {
         <>
             {!!isOpenedModal && (
                 <div className="fixed inset-0 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
-                    <div className="relative w-auto max-w-3xl mx-auto my-6 z-50">
+                    <div className="relative w-auto mx-auto my-6 z-50">
                         <div className="relative bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
-                            <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
+                            <div className="flex items-start justify-between p-1 rounded-t">
                                 <button
                                     className="p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                                     onClick={closeModal}
@@ -25,7 +25,7 @@ const Modal = ({ isOpen, onClose, children }) => {
                                 </button>
                             </div>
                             {/* Body */}
-                            <div className="relative p-6 flex-auto">{children}</div>
+                            <div className="relative p-3 flex">{children}</div>
                         </div>
                     </div>
                     <div className="fixed inset-0 z-40 bg-black opacity-50"></div>

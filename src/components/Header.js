@@ -1,15 +1,11 @@
-import { usePosts } from "../context/UserContext";
-import Results from "./Results";
-import PostsSearch from "./posts/PostSearch";
+const Header = () => {
+  return (
+    <header>
+      <h1>
+        Posterr
+      </h1>
+    </header>
+  );
+}
 
-function Header({ hideSearch }) {
-    return (
-      <header>
-        <h1>
-          Posterr
-        </h1>
-      </header>
-    );
-  }
-
-  export default Header;
+export default Header;

@@ -1,18 +1,60 @@
+import { usePosts } from "../../context/UserContext";
 import Avatar from "../avatar/Avatar";
 
 const UserProfile = ({ userData }) => {
+
+    const { profileInfo, onAddPost, onAddFollower } = usePosts();
+
+    const addRepost = (body) => {
+        const post = {
+            postBody: body,
+            user: profileInfo,
+            typeOfPost: 'repost'
+        }
+
+        onAddPost(post);
+    }
+
+    const addQuotePost = () => {
+
+    }
+
+    const onClickFollowUser = (isFollowing) => {
+        onAddFollower(userData.userId, isFollowing);
+    }
+
     return (
         <div className="container mx-auto">
-            <div className="max-w-sm mx-autobg-white overflow-hidden">
+            <div className="mx-autobg-white overflow-hidden">
                 {/* User Information */}
 
-                <div className="p-2 flex items-center">
+                <div className="flex p-2 items-center">
                     {/* User Avatar */}
                     <Avatar firstName={userData?.firstName} lastName={userData.lastName} />
                     {/* User Name */}
-                    <div>
+                    <div className="flex-1 ml-3">
                         <h2 className="text-xl font-bold mb-0">{userData.firstName} {userData.lastName}</h2>
-                        <p className="text-gray-700">{userData.isFollowing ? 'Following' : 'Not Following'}</p>
+                        <span className="inline-block bg-gray-600 text-white text-xs font-semibold rounded-full px-2 py-1">{userData.isFollowing ? 'Following' : 'Not Following'}</span>
+                    </div>
+
+                    <div className="flex self-end items-center">
+                        {
+                            userData.isFollowing ? (
+                                <button onClick={ () => onClickFollowUser(false) } className="flex bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
+                                    </svg>
+                                    <span className="ml-2">Unfollow</span>
+                                </button>
+                            ) : (
+                                <button onClick={ () => onClickFollowUser(true) } className="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+                                    </svg>
+                                    <span className="ml-2">Follow</span>
+                                </button>
+                            )
+                        }
                     </div>
                 </div>
 
@@ -43,14 +85,14 @@ const UserProfile = ({ userData }) => {
                         <ul>
                             {/* Loop through user posts */}
                             {userData.posts.map((post, index) => (
-                                <li key={`post-${userData?.userId}-${index}`} className="user-post mb-4" >
-                                    <div className="bg-gray-100 p-2 rounded-lg shadow">
-                                        <h4 className="font-semibold">{post.title}</h4>
+                                <li key={`post-${userData?.userId}-${index}`} className="user-post bg-gray-100 p-2 rounded-lg shadow mb-4" >
+                                    <div className="p-4">
+                                        <h4 className="mb-2 font-semibold">{userData?.firstName} {userData.lastName}</h4>
                                         <p className="text-sm text-gray-700">{post.postBody}</p>
                                     </div>
-                                    <div className="p-1 flex justify-between">
-                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Repost</button>
-                                        <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Quote Post</button>
+                                    <div className="p-1 flex justify-end gap-2">
+                                        <button onClick={() => { addRepost(post?.postBody) }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Repost</button>
+                                        <button onClick={() => { addQuotePost() }} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Quote Post</button>
                                     </div>
                                 </li>
                             ))}

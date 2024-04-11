@@ -1,12 +1,11 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { useParams } from 'react-router-dom';
 
 /*
   Context creation
 */
 const UserContext = createContext();
 
-function UserProvider({ user, children, isTestingPosterr }) {
+const UserProvider = ({ user, children, isTestingPosterr }) =>{
   const [posts, setPosts] = useState([{ postBody: '' }]);
   const [collection, setCollection] = useState('all');
   
@@ -38,7 +37,7 @@ function UserProvider({ user, children, isTestingPosterr }) {
       TODO = In a real scenario we must use a API call
       for now, we are going to use a fake configuration
     */
-  }, [isTestingPosterr, collection]);
+  }, [user, isTestingPosterr, collection]);
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -55,25 +54,43 @@ function UserProvider({ user, children, isTestingPosterr }) {
       : posts;
   }
 
-  function handleAddPost(post) {
+  const handleAddPost = (post) => {
     setPosts((posts) => [post, ...posts]);
   }
 
-  function handleClearPosts() {
+  const handleClearPosts = () => {
     setPosts([]);
+  }
+
+  const handleAddFollower = (userId, isFollowing) => {
+    const updatedPosts = posts.map(post => {
+      console.log('post.user.userId', post.user.userId, userId);
+      if(post.user.userId === userId){
+        return { ...post, user: { ...post.user, isFollowing } };
+      }
+
+      return post;
+    });
+
+    /*
+      Update post
+    */
+    setPosts(updatedPosts);
   }
 
   const value = useMemo(() => {
     return {
       posts: searchedPosts,
       profileInfo: user,
+      collection,
       onAddPost: handleAddPost,
       onClearPosts: handleClearPosts,
+      onAddFollower: handleAddFollower,
       searchQuery,
       setSearchQuery,
       setCollection,
     };
-  }, [searchedPosts, searchQuery]);
+  }, [posts, collection, user, searchedPosts, searchQuery, handleAddFollower]);
 
   return (
     // All chidren should receive values from Post Content Provider
@@ -81,7 +98,7 @@ function UserProvider({ user, children, isTestingPosterr }) {
   );
 }
 
-function usePosts() {
+const usePosts = () => {
   const context = useContext(UserContext);
   if (context === undefined)
     throw new Error("UserContext was used outside of the UserProvider");

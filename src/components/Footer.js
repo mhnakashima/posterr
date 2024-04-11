@@ -1,5 +1,5 @@
-function Footer() {
-    return <footer>&copy; by Posterr - mhnakashima </footer>;
+const Footer = () => {
+    return <footer className="mt-16 text-center">&copy; by Posterr - mhnakashima </footer>;
 }
 
 export default Footer;

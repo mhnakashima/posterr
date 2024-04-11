@@ -8,8 +8,6 @@ function createFakeConfiguration() {
     userData = generateFirstUserData();
   }
 
-  console.log('userData', userData);
-
   return userData;
 }
 
@@ -29,9 +27,9 @@ const generateFirstUserData = () => {
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         isFollower: faker.datatype.boolean(),
-        isFollowing: faker.datatype.boolean(),
-        numOfFollowers: faker.datatype.number({min: 0, max: 99999}),
-        numOfFollowing: faker.datatype.number({min: 0, max: 99999}),
+        isFollowing: false,
+        numOfFollowers: faker.datatype.number({min: 0, max: 150}),
+        numOfFollowing: faker.datatype.number({min: 0, max: 150}),
         posts: Array.from({length: POSTERR_NUM_OF_POSTS}, () => {
           return {
             postBody: faker.hacker.phrase(),

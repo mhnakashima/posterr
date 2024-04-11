@@ -1,14 +1,21 @@
 import { useState } from "react";
 import { usePosts } from "../../context/UserContext";
 
-function PostAdd() {
-  const { onAddPost } = usePosts();
+const PostAdd = () => {
+  const { profileInfo, onAddPost } = usePosts();
   const [body, setBody] = useState("");
 
   const handleSubmit = function (e) {
     e.preventDefault();
     if (!body) return;
-    onAddPost({ body });
+
+    const post = {
+      postBody: body, 
+      user: profileInfo,
+      typeOfPost: 'post'
+    }
+
+    onAddPost(post);
     setBody("");
   };
 

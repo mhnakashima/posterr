@@ -1,6 +1,6 @@
 import { usePosts } from "../../context/UserContext";
 
-function PostsSearch() {
+const PostsSearch = () => {
     const { searchQuery, setSearchQuery } = usePosts();
 
     return (

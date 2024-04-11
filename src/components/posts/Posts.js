@@ -1,12 +1,11 @@
 import PostList from "./PostList";
-import PostToogle from "./PostToogle";
 
-function Posts() {
-    return (
-      <section className="posts rounded-md bg-gray-100 p-4">
-        <PostList />
-      </section>
-    );
-  }
+const Posts = () => {
+  return (
+    <section className="post">
+      <PostList />
+    </section>
+  );
+}
 
-  export default Posts;
+export default Posts;
