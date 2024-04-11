@@ -18,7 +18,7 @@ const UserProfileInfo = () => {
         setNumOfFollowers(posts?.filter(post => post?.user?.isFollower).length);
         setNumOfPosts(posts?.filter(post => post?.user?.userId === profileInfo.userId).length);
 
-    }, [posts])
+    }, [posts, profileInfo])
 
     return (
         <section className="p-3 rounded-md bg-gray-100 mb-4">

@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { POSTERR_LOCAL_STORAGE_KEY } from "../api/constants";
 
 /*
   Context creation
@@ -8,6 +9,7 @@ const UserContext = createContext();
 const UserProvider = ({ user, children, isTestingPosterr }) =>{
   const [posts, setPosts] = useState([{ postBody: '' }]);
   const [collection, setCollection] = useState('all');
+  const [quotedPost, setQuotedPost] = useState(undefined);
   
   /*
     TODO = isTestingPosterr
@@ -19,13 +21,7 @@ const UserProvider = ({ user, children, isTestingPosterr }) =>{
     done in a future task
   */
   useEffect(() => {
-    let postCollection;
-
-    if (collection !== "following") {
-      postCollection = user?.posts;
-    } else {
-      postCollection = user?.posts.filter(post => post.user?.isFollowing);
-    }
+    let postCollection = user?.posts;
 
     if (!user) {
       return;
@@ -54,17 +50,46 @@ const UserProvider = ({ user, children, isTestingPosterr }) =>{
       : posts;
   }
 
-  const handleAddPost = (post) => {
-    setPosts((posts) => [post, ...posts]);
+  const saveData = useCallback((updatedPosts) => {
+    const objectToSave = {
+      ...user,
+      posts: updatedPosts,
+    }
+
+    window.localStorage.setItem(POSTERR_LOCAL_STORAGE_KEY, JSON.stringify(objectToSave));
+  }, [user]);
+
+  const handleAddPost = useCallback((post) => {
+    
+    let updatedPosts;
+    
+    if(post.typeOfPost === 'quote'){
+      const newPost = {
+        ...post, user, quotedPost
+      }
+    
+      updatedPosts = [newPost, ...posts];
+    }else{
+      updatedPosts = [post, ...posts];
+    }
+
+    setQuotedPost(undefined)
+    setPosts(updatedPosts);
+    saveData(updatedPosts);
+
+    // Handle the saved data
+  }, [quotedPost, user, posts, saveData]);
+
+  const handeQuotedPost = (post) => {
+    setQuotedPost(post);
   }
 
   const handleClearPosts = () => {
     setPosts([]);
   }
 
-  const handleAddFollower = (userId, isFollowing) => {
+  const handleAddFollower = useCallback((userId, isFollowing) => {
     const updatedPosts = posts.map(post => {
-      console.log('post.user.userId', post.user.userId, userId);
       if(post.user.userId === userId){
         return { ...post, user: { ...post.user, isFollowing } };
       }
@@ -76,21 +101,24 @@ const UserProvider = ({ user, children, isTestingPosterr }) =>{
       Update post
     */
     setPosts(updatedPosts);
-  }
+    saveData(updatedPosts);
+  }, [posts, saveData]);
 
   const value = useMemo(() => {
     return {
       posts: searchedPosts,
       profileInfo: user,
+      quotedPost,
       collection,
       onAddPost: handleAddPost,
+      onAddQuotedPost: handeQuotedPost,
       onClearPosts: handleClearPosts,
       onAddFollower: handleAddFollower,
       searchQuery,
       setSearchQuery,
       setCollection,
     };
-  }, [posts, collection, user, searchedPosts, searchQuery, handleAddFollower]);
+  },[collection, user, quotedPost, handleAddPost, handleAddFollower, searchedPosts, searchQuery]);
 
   return (
     // All chidren should receive values from Post Content Provider

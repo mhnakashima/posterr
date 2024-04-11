@@ -3,7 +3,7 @@ import Avatar from "../avatar/Avatar";
 
 const UserProfile = ({ userData }) => {
 
-    const { profileInfo, onAddPost, onAddFollower } = usePosts();
+    const { profileInfo, onAddPost, onAddQuotedPost, onAddFollower } = usePosts();
 
     const addRepost = (body) => {
         const post = {
@@ -15,8 +15,14 @@ const UserProfile = ({ userData }) => {
         onAddPost(post);
     }
 
-    const addQuotePost = () => {
+    const addQuotePost = (quotedPost) => {
+        const post = {
+            postBody: quotedPost.postBody,
+            user: userData,
+            typeOfPost: 'quote'
+        }
 
+        onAddQuotedPost(post);
     }
 
     const onClickFollowUser = (isFollowing) => {
@@ -40,14 +46,14 @@ const UserProfile = ({ userData }) => {
                     <div className="flex self-end items-center">
                         {
                             userData.isFollowing ? (
-                                <button onClick={ () => onClickFollowUser(false) } className="flex bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                                <button onClick={() => onClickFollowUser(false)} className="flex bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
                                     </svg>
                                     <span className="ml-2">Unfollow</span>
                                 </button>
                             ) : (
-                                <button onClick={ () => onClickFollowUser(true) } className="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                                <button onClick={() => onClickFollowUser(true)} className="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
                                     </svg>
@@ -92,7 +98,7 @@ const UserProfile = ({ userData }) => {
                                     </div>
                                     <div className="p-1 flex justify-end gap-2">
                                         <button onClick={() => { addRepost(post?.postBody) }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Repost</button>
-                                        <button onClick={() => { addQuotePost() }} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Quote Post</button>
+                                        <button onClick={() => { addQuotePost(post) }} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Quote Post</button>
                                     </div>
                                 </li>
                             ))}

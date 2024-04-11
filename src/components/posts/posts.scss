@@ -6,4 +6,12 @@
             }
         }
     }
+
+    &--quoted{
+        .avatar{
+            @media screen and (min-device: 48em) {
+                display: none;
+            }
+        }
+    }
 }

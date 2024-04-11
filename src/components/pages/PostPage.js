@@ -7,32 +7,50 @@ import Modal from "../modal/Modal";
 import PostToogle from "../posts/PostToogle";
 import UserProfile from "../user/UserProfile";
 import UserProfileInfo from "../user/UserProfileInfo";
+import PostQuote from "../posts/PostQuote";
 
 const PostPage = () => {
   const { collection, profile } = useParams();
-  const { profileInfo, posts, setCollection } = usePosts();
+  const { profileInfo, posts, quotedPost, setCollection } = usePosts();
   const [userProfile, setUserProfile] = useState();
+  const [userQuotedPost, setUserQuotedPost] = useState();
 
   useEffect(() => {
     if (collection) {
       setCollection(collection);
     }
 
-    if (!profile) {
-      return;
+    /*
+      Open modal from profile
+    */
+    if (profile) {
+      const userProfileData = posts.find((post => post?.user?.userId === profile))?.user;
+
+      if (userProfileData || userProfileData?.userId === profileInfo?.userId) {
+        setUserProfile(userProfileData);
+      }
     }
 
-    const userProfileData = posts.find((post => post?.user?.userId === profile))?.user;
-
-    if (!userProfileData || userProfileData?.userId === profileInfo?.userId) {
-      return;
+    /*
+      Open modal from quoted post
+    */
+    if (quotedPost) {
+      /*
+        I must setProfile to undefined
+        It should be refactored, to open a modal
+        is necessary only if it's open, the content and close behaviour
+      */
+      setUserProfile(undefined);
+      setUserQuotedPost(quotedPost);
+    }else{
+      setUserQuotedPost();
     }
 
-    setUserProfile(userProfileData);
-  }, [posts, collection, profile, profileInfo, setCollection]);
+  }, [posts, userQuotedPost, quotedPost, collection, profile, profileInfo, setCollection]);
 
   const onCloseModal = () => {
     setUserProfile(undefined);
+    setUserQuotedPost(undefined);
   }
 
   return (
@@ -53,10 +71,24 @@ const PostPage = () => {
       </div>
       {
         !!userProfile && (
-          <Modal isOpen={userProfile} onClose={onCloseModal}>
-            <UserProfile userData={userProfile} />
-          </Modal>
+          <>
+            <span>teste1</span>
+            <Modal isOpen={userProfile} onClose={onCloseModal}>
+              {!!userProfile && (<UserProfile userData={userProfile} />)}
+            </Modal>
+          </>
         )
+      }
+      {
+        !!userQuotedPost && (
+          <>
+            <span>teste2</span>
+            <Modal isOpen={userQuotedPost} onClose={onCloseModal}>
+              {!!quotedPost && (<PostQuote typeOfPost='quote' />)}
+            </Modal>
+          </>
+        )
+
       }
     </>
   );

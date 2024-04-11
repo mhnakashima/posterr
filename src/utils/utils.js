@@ -6,6 +6,7 @@ function createFakeConfiguration() {
 
   if (!userData) {
     userData = generateFirstUserData();
+    window.localStorage.setItem(POSTERR_LOCAL_STORAGE_KEY, JSON.stringify(userData));
   }
 
   return userData;
