@@ -1,65 +1,58 @@
 # posterr
-/* Poster microblog app */
+/* 
+    Posterr = Microblog app - Do your posterring  
+*/
 
+# How to run
+Posterr has been created using React and what do you need to run
+the application is: 
 
-### Pages
+- Download the code
+- Descompact the zip
+- command line on the folder application 
+- npm i
+- After all packages installed, run npm run start
+- The application should run over localhost:3000
 
-**Homepage**
+P.S: You should have Node / npm installed (consider install NVM to manage Node versions)
 
-- The homepage, by default, will show a feed of all posts, from all users - ok
-- There is a toggle switch "All / following" that allows you to switch between seeing all posts and just posts by those you follow. For both views, all kinds of posts are expected on the feed (regular posts, reposts, and quote posts) - ok
-    - The URL should change when toggling between  "All / following"
-    - If you open the page fresh, by typing the URL for "All" or "Following" in the browser, it should show the properly unfiltered or filtered page. ok
-- New posts can be written from this page. ok
+# Phase 2 - Planning
 
-**User profile page**
+## Questions regarding the functionality
+- Will it be possible to reply more than 1 user per time?
+- Would I able to mentioning more than 1 user?
+- How user is going to know when someone has "mentioned" him?
+- Are we going to implement a kind of notification to alert when user is mentioned?
+- It will be a extra effort, do we have this planned already?
+    - Do we have a Real Time database purchased?
+    - Is there a dev, stage, prod env keys?
+        - If yes, are the keys available?
+        - else we are going to use a kind of checking by cycles from how many seconds?  
 
-- This page should be a modal over the homepage
-- The URL should change when visiting this page
-- Shows data about the user:
-    - Username
-    - Date joined Posterr, formatted as such: "March 25, 2021"
-    - Number of followers
-    - Number following
-    - Count of number of posts the user has made (including reposts and quote posts)
-- Shows a feed of all posts the user has made (including reposts and quote posts)
-- Shows whether you follow the user or not
-- Follow/unfollow actions:
-    - You can follow the user by clicking "Follow" on their profile
-    - You can unfollow the user by clicking "Unfollow" on their profile
-- New posts can be written from this page
-    - While on the profile page, the profile's user should be the author of any content created (posts, reports, quote-posts)
+## About the implementation
+- For mentioning it will be necessary to have a real time database to observe any mention that
+could be made by some user 
+- It should be created a new URL, when it accessed show a list of posts, using the array of posts
+that has been created already, it is possible to create a type of post called "mention" filtering
+posts when call api by this kind of filter
+- When a notification come, indicating that has been created a mention, it should show on notifications
+list with a red bullet indicating that is a new notification and listing, when the user clicks, show all mentions.
+- It will be created a page component to handle with mention posts, it will should be similar a Post Page.
 
-### More Details
-
-**Users**
-
-- Only alphanumeric characters can be used for username
-- Maximum 14 characters for username
-- When/if necessary to make your application function, you may hard-code the default user. For example, you may need to do this to implement creating new posts from the home page, following, etc
-
-**Posts**
-
-Posts are the equivalent of Twitter's tweets. They are text-only, user-generated content. Users can write original posts and interact with other users' posts by reposting or quote-posting. For this project, you should implement all three — original posts, reposts, and quote-posting
-
-- Users are not allowed to post more than 5 posts in one day (including reposts and quote posts)
-- Posts can have a maximum of 777 characters
-- When writing a post, a user should see how many characters he has left
-- Users cannot update or delete their posts
-- Reposting: Users can repost other users' posts (like Twitter Retweet)
-- Quote-post: Users can repost other user's posts and leave a comment along with it (like Twitter Quote Tweet)
-
-**Following**
-
-- Users should be able to follow other users
-- Users cannot follow themselves
-- Following and unfollowing will be done only on the user profile page
-
-### Extra **feature: Search**
-
-Only work on this extra feature if you have enough time to complete the required features and get through all three phases of the test.
-
-- Implement a search feature that allows users to efficiently search through all posts
-- This search feature should not return reposts
-- This search feature should return quote posts, but only if the search matches the additional text added (do **not** return matches from the original post that was quoted on top of)
-- (For Phase 2) This search feature should return reply-to-posts
+# Phase 3 - Critique & scaling
+- I would like to do changes on components, refactoring, and making minor components to be more generic
+- It should be good remove dependencies of calling usePosts context, the components don't need to know what's happening on
+contexts, it should deal only with dispatch and receiving information and data.
+- Create a better structure for css, tailwind is a reat CSS framework but sometimes not readiable
+- Create a User Provider to deal only with User context related content
+- Refactor components to dispatch events instead of dealing direct with context
+- The first part will be down if the application scale, increased the number of users, it will be related to posts, I was getting all posts from "database" with user informantion, and on this user information, retriving a list of posts made by him, this is not a good perfomance practice
+and it removing the responsability of API to deal only to get the necessary information regarding posts.
+- It should be created api's to deal with getting posts, users.
+- It should be good to CDN or provide cached assets and html / css files.
+- It is nice to have a Continuous delivery, with that configurated pipelines to deal with environments that the application is going to use
+- This application can be divided in minor parts of code and every part can have its own deploy process
+(It might be done using module federalization).
+- It's nice to have repo with generic components (Storybook is a good approach)
+- I would like to refactor the layout to be more concise.
+ 
