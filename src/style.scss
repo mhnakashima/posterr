@@ -1,13 +1,17 @@
-@import './assets/scss/tailwind.scss';
-@import './assets/scss/main.scss';
+@import "./assets/scss/tailwind.scss";
+@import "./assets/scss/posts.scss";
 
-/* Post */
-@import './components/posts/posts.scss';
-
+/* 
+  General Rules
+*/
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+*::placeholder {
+  color: #999;
 }
 
 body {
@@ -33,43 +37,12 @@ body {
   border: none;
 }
 
-
 header {
-  margin-bottom: 32px;
-  font-weight: bold;
-
-  justify-content: space-between;
-  display: flex;
-}
-
-h1 {
-  font-size: 26px;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-h1 span {
-  font-size: 140%;
-  line-height: 1;
-}
-
-h2 {
-  text-transform: uppercase;
-  margin-bottom: 24px;
-  color: #333;
-}
-
-h3 {
-  text-transform: capitalize;
-  margin-bottom: 16px;
-  color: #333;
-}
-
-header div {
-  display: flex;
-  gap: 32px;
-  align-items: center;
+  div {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
 }
 
 form {
@@ -79,20 +52,16 @@ form {
 }
 
 input,
-textarea{
+textarea {
   font-size: 16px;
   font-family: inherit;
   color: inherit;
 }
 
-textarea{
-  min-height: 3em;
+textarea {
+  min-height: 5em;
   padding: 1em;
   resize: none;
-}
-
-*::placeholder {
-  color: #999;
 }
 
 textarea {
@@ -100,18 +69,19 @@ textarea {
   height: 50px;
 }
 
-aside ul {
-  font-size: 90%;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
+aside {
+  ul {
+    font-size: 90%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
 
-aside li {
-  padding: 4px 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  li {
+    padding: 4px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
-

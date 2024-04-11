@@ -1,7 +1,7 @@
 const Header = () => {
   return (
-    <header>
-      <h1>
+    <header className="sm:mb-5">
+      <h1 className="text-2xl font-bold">
         Posterr
       </h1>
     </header>
