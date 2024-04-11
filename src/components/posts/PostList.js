@@ -65,7 +65,7 @@ const PostList = () => {
               </div>
               {
                 post?.quotedPost && (
-                  <div className="flex bg-gray-200 p-4 my-3 rounded-md gap-4">
+                  <div className="post--quoted flex bg-gray-200 p-4 my-3 rounded-md gap-4">
                     <Avatar firstName={post?.quotedPost?.user?.firstName?.charAt(0) || 'X'} lastName={post?.quotedPost?.user?.lastName?.charAt(0) || 'X'} />
                     <div className="">
                       <h4 className="mb-2 font-semibold">{post?.quotedPost?.user?.firstName} {post?.quotedPost?.user?.lastName}</h4>

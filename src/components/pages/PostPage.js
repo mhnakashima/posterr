@@ -62,7 +62,7 @@ const PostPage = () => {
             <UserProfileInfo />
           </aside>
           <section className="lg:col-span-8 col-span-12" >
-            <div className="flex justify-end my-4 gap-2">
+            <div className="flex justify-end mb-4 gap-2">
               <PostToogle />
             </div>
             <PostContainer />

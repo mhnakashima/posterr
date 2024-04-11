@@ -21,7 +21,7 @@ const UserProfileInfo = () => {
     }, [posts, profileInfo])
 
     return (
-        <section className="p-3 rounded-md bg-gray-100 mb-4">
+        <section className="p-3 rounded-md bg-gray-100 sm:mb-4">
             <div className=" flex items-center">
                 {/* User Avatar */}
                 <Avatar firstName={profileInfo?.firstName} lastName={profileInfo.lastName} />

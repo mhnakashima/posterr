@@ -16,8 +16,6 @@ body {
 
   color: #222;
   line-height: 1.25;
-  background: #fff;
-  padding: 32px;
 }
 
 .fake-dark-mode {
@@ -88,7 +86,9 @@ textarea{
 }
 
 textarea{
+  min-height: 3em;
   padding: 1em;
+  resize: none;
 }
 
 *::placeholder {

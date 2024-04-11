@@ -91,7 +91,7 @@ const UserProfile = ({ userData }) => {
                         <ul>
                             {/* Loop through user posts */}
                             {userData.posts.map((post, index) => (
-                                <li key={`post-${userData?.userId}-${index}`} className="user-post bg-gray-100 p-2 rounded-lg shadow mb-4" >
+                                <li key={`post-${userData?.userId}-${index}`} className="user-post bg-gray-100 p-2 rounded-lg shadow sm:mb-4" >
                                     <div className="p-4">
                                         <h4 className="mb-2 font-semibold">{userData?.firstName} {userData.lastName}</h4>
                                         <p className="text-sm text-gray-700">{post.postBody}</p>

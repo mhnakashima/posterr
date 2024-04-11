@@ -18,7 +18,7 @@ const App = () => {
   );
 
   return (
-    <section className="">
+    <section className="mx-4">
       <button
         onClick={() => setIsFakeDark((isFakeDark) => !isFakeDark)}
         className="btn-fake-dark-mode"

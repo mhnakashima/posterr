@@ -22,7 +22,7 @@ const PostAdd = ({ typeOfPost }) => {
   };
 
   return (
-    <div className="mb-4 rounded-md bg-gray-100" >
+    <div className="sm:mb-4 rounded-md bg-gray-100" >
       <form className="flex flex-col" onSubmit={handleSubmit}>
         <div className="flex ">
           <textarea

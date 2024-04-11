@@ -9,7 +9,7 @@
 
     &--quoted{
         .avatar{
-            @media screen and (min-device: 48em) {
+            @media screen and (max-width: 48em) {
                 display: none;
             }
         }
