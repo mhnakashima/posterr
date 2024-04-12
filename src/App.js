@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { POSTERR_IS_TESTING } from "./api/constants";
-import Footer from "./components/Footer";
-import PostPage from "./components/pages/PostPage";
 import { UserProvider } from "./context/UserContext";
 import { createFakeConfiguration } from "./utils/utils";
+import PostPage from "./pages/PostPage";
+import Footer from "./components/footer/Footer";
 
 const App = () => {
   // Whenever `isFakeDark` changes, we toggle the `fake-dark-mode` class on the HTML element (see in "Elements" dev tool).
@@ -18,25 +18,19 @@ const App = () => {
   );
 
   return (
-    <section className="mx-4">
-      <button
-        onClick={() => setIsFakeDark((isFakeDark) => !isFakeDark)}
-        className="btn-fake-dark-mode"
-      >
-        {isFakeDark ? "☀️" : "🌙"}
-      </button>
+    <main className="posterr">
       <BrowserRouter>
-        <UserProvider user={user} isTestingPosterr={isTestingPosterr}>
+        <UserProvider user={user}>
           <Routes>
             <Route path="/:collection" element={<PostPage />} />
             <Route path="/:profile" element={<PostPage />} />
             <Route path="/:collection?/:profile?" element={<PostPage />} />
             <Route path="*" element={<PostPage />} />
           </Routes>
-          <Footer />
         </UserProvider>
       </BrowserRouter>
-    </section>
+      <Footer />
+    </main>
   );
 }
 

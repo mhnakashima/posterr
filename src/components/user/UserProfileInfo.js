@@ -21,13 +21,13 @@ const UserProfileInfo = () => {
     }, [posts, profileInfo])
 
     return (
-        <section className="p-3 rounded-md bg-gray-100 sm:mb-4">
+        <section className="flex flex-col gap-3 p-4 border border-1 border-gray-200 rounded-2xl">
             <div className=" flex items-center">
                 {/* User Avatar */}
                 <Avatar firstName={profileInfo?.firstName} lastName={profileInfo.lastName} />
                 {/* User Name */}
                 <div className="ml-2">
-                    <h2 className="text-xl font-bold mb-0">{profileInfo.firstName} {profileInfo.lastName}</h2>
+                    <h2 className="text-xl font-bold">{profileInfo.firstName} {profileInfo.lastName}</h2>
                 </div>
             </div>
 

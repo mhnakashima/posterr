@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import PostContainer from "../../containers/PostContainer";
-import { usePosts } from "../../context/UserContext";
-import Header from "../Header";
-import Modal from "../modal/Modal";
-import PostToogle from "../posts/PostToogle";
-import UserProfile from "../user/UserProfile";
-import UserProfileInfo from "../user/UserProfileInfo";
-import PostQuote from "../posts/PostQuote";
+import PostContainer from "../containers/PostContainer";
+import { usePosts } from "../context/UserContext";
+import PostToogle from "../components/posts/PostToogle";
+import UserProfile from "../components/user/UserProfile";
+import UserProfileInfo from "../components/user/UserProfileInfo";
+import PostQuote from "../components/posts/PostQuote";
+import Header from "../components/header/Header";
+import Modal from "../components/modal/Modal";
 
 const PostPage = () => {
   const { collection, profile } = useParams();
@@ -55,24 +55,23 @@ const PostPage = () => {
 
   return (
     <>
+      <Header />
       <div className="mt-4 container mx-auto" >
         <div className="grid grid-cols-12 gap-4">
-          <aside className="lg:col-span-4 col-span-12" >
-            <Header />
-            <UserProfileInfo />
-          </aside>
           <section className="lg:col-span-8 col-span-12" >
             <div className="flex justify-end mb-4 gap-2">
               <PostToogle />
             </div>
             <PostContainer />
           </section>
+          <aside className="lg:col-span-4 col-span-12" >
+            <UserProfileInfo />
+          </aside>
         </div>
       </div>
       {
         !!userProfile && (
           <>
-            <span>teste1</span>
             <Modal isOpen={userProfile} onClose={onCloseModal}>
               {!!userProfile && (<UserProfile userData={userProfile} />)}
             </Modal>
@@ -82,7 +81,6 @@ const PostPage = () => {
       {
         !!userQuotedPost && (
           <>
-            <span>teste2</span>
             <Modal isOpen={userQuotedPost} onClose={onCloseModal}>
               {!!quotedPost && (<PostQuote typeOfPost='quote' />)}
             </Modal>
