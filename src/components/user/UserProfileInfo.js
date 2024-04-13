@@ -21,26 +21,26 @@ const UserProfileInfo = () => {
     }, [posts, profileInfo])
 
     return (
-        <section className="flex flex-col gap-3 p-4 border border-1 border-gray-200 rounded-2xl">
+        <section className="flex flex-col gap-3 p-4">
             <div className=" flex items-center">
                 {/* User Avatar */}
                 <Avatar firstName={profileInfo?.firstName} lastName={profileInfo.lastName} />
                 {/* User Name */}
                 <div className="ml-2">
-                    <h2 className="text-xl font-bold">{profileInfo.firstName} {profileInfo.lastName}</h2>
+                    <h2 className="text-medium font-semibold">{profileInfo.firstName} {profileInfo.lastName}</h2>
                 </div>
             </div>
 
             {/* Following, Followers, and Number of Posts Row */}
-            <div className="py-4 grid grid-cols-3 gap-4">
+            <div className="py-2 grid grid-cols-3 gap-4">
                 {/* Number of Followers */}
-                <div className="text-center">
+                <div className="text-center border-r border-gray-200">
                     <span className="font-bold block">{numOfFollowers || 0}</span>
                     <span className="text-gray-700 block">Followers</span>
                 </div>
 
                 {/* Number of Following */}
-                <div className="text-center">
+                <div className="text-center border-r border-gray-200">
                     <span className="font-bold block">{numOfFollowing || 0}</span>
                     <span className="text-gray-700 block">Following</span>
                 </div>

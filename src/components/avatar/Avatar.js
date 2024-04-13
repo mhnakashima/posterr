@@ -2,7 +2,7 @@ import { getInitials } from "../../utils/utils";
 
 const Avatar = ({firstName, lastName}) => {
     return (
-        <div className="avatar w-4 h-4 sm:w-8 sm:h-8 rounded-full bg-gray-300 flex items-center justify-center text-gray-700 font-semibold">
+        <div className="avatar w-8 h-8 text-sm rounded-full bg-gray-300 flex items-center justify-center text-gray-700 ">
             {getInitials(firstName, lastName)}
         </div>
     )

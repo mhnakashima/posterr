@@ -1,0 +1,28 @@
+.post {
+  &-toogle {
+    &-link {
+      &.isDisabled {
+        cursor: default;
+      }
+    }
+  }
+
+  &--quoted {
+    .avatar {
+      @media screen and (max-width: 48em) {
+        display: none;
+      }
+    }
+  }
+
+  &--list {
+    li {
+      &:last-child {
+        hr {
+          margin-bottom: 0;
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
+}

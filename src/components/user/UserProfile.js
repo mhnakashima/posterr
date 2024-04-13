@@ -39,7 +39,7 @@ const UserProfile = ({ userData }) => {
                     <Avatar firstName={userData?.firstName} lastName={userData.lastName} />
                     {/* User Name */}
                     <div className="flex-1 ml-3">
-                        <h2 className="text-xl font-bold mb-0">{userData.firstName} {userData.lastName}</h2>
+                        <h2 className="text-medium mb-0">{userData.firstName} {userData.lastName}</h2>
                         <span className="inline-block bg-gray-600 text-white text-xs font-semibold rounded-full px-2 py-1">{userData.isFollowing ? 'Following' : 'Not Following'}</span>
                     </div>
 

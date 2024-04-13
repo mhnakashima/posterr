@@ -1,15 +1,15 @@
 import { memo } from "react";
 
 import Posts from "../components/posts/Posts";
-import PostAdd from '../components/posts/PostAdd';
+import PostToogle from "../components/posts/PostToogle";
 
 const PostContainer = memo(
     function PostContainer() {
         return (
-            <main>
-                <PostAdd />
+            <section className="post--container px-4">
+                <PostToogle />
                 <Posts />
-            </main>
+            </section>
         );
     }
 );

@@ -8,6 +8,7 @@ import UserProfileInfo from "../components/user/UserProfileInfo";
 import PostQuote from "../components/posts/PostQuote";
 import Header from "../components/header/Header";
 import Modal from "../components/modal/Modal";
+import PostAdd from "../components/posts/PostAdd";
 
 const PostPage = () => {
   const { collection, profile } = useParams();
@@ -42,7 +43,7 @@ const PostPage = () => {
       */
       setUserProfile(undefined);
       setUserQuotedPost(quotedPost);
-    }else{
+    } else {
       setUserQuotedPost();
     }
 
@@ -54,21 +55,21 @@ const PostPage = () => {
   }
 
   return (
-    <>
+    <div className="page w-full h-full">
       <Header />
-      <div className="mt-4 container mx-auto" >
-        <div className="grid grid-cols-12 gap-4">
-          <section className="lg:col-span-8 col-span-12" >
-            <div className="flex justify-end mb-4 gap-2">
-              <PostToogle />
-            </div>
-            <PostContainer />
-          </section>
-          <aside className="lg:col-span-4 col-span-12" >
+
+      <main className="page--container border-l border-r border-gray-200 mx-auto h-full w-full">
+        <section className="flex flex-wrap justify-center w-full flex gap-12">
+          <div className="w-full">
             <UserProfileInfo />
-          </aside>
-        </div>
-      </div>
+            <hr class="block border-t border-gray-200 my-1" />
+            <PostAdd />
+
+            <PostContainer />
+          </div>
+        </section>
+      </main>
+
       {
         !!userProfile && (
           <>
@@ -88,7 +89,7 @@ const PostPage = () => {
         )
 
       }
-    </>
+    </div>
   );
 }
 

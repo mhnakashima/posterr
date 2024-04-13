@@ -2,6 +2,7 @@ import { useState } from "react";
 import { POSTERR_MIN_INPUT_LENGTH } from "../../api/constants";
 import { usePosts } from "../../context/UserContext";
 import Avatar from "../avatar/Avatar";
+import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 
 const PostAdd = ({ typeOfPost }) => {
   const { profileInfo, quotedPost, onAddPost } = usePosts();
@@ -22,19 +23,25 @@ const PostAdd = ({ typeOfPost }) => {
   };
 
   return (
-    <div className="sm:mb-4 rounded-md bg-gray-100" >
-      <form className="flex flex-col" onSubmit={handleSubmit}>
+    <div className="sm:mb-4" >
+      <form className="flex flex-col w-full px-4" onSubmit={handleSubmit}>
         <div className="flex ">
-          <textarea
-            className=""
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            placeholder={`${typeOfPost === 'quote' ? 'Add a comment' : 'Start posterring!!!'}`}
-          />
+          <div className="w-full">
+            <textarea
+              className="h-20 w-full p-4 outline-1 focus:outline-none"
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              placeholder={`${typeOfPost === 'quote' ? 'Add a comment' : 'Start posterring!!!'}`}
+            />
+          </div>
         </div>
-        <button disabled={body.length < 3} className={`${body.length < POSTERR_MIN_INPUT_LENGTH ? 'opacity-50 cursor-not-allowed' : ''} flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded flex justify-center`}>Add post</button>
+        <button
+          disabled={body.length < 3}
+          className={`${body.length < POSTERR_MIN_INPUT_LENGTH ? 'opacity-50 cursor-not-allowed' : ''} flex justify-center items-center ring-1 ring-gray-300 ring-inset enabled:hover:bg-gray-200 enabled:active:bg-gray-300 enabled:hover:ring-gray-200 enabled:active:ring-gray-300 rounded-lg h-12 px-5 w-full relative`}>
+          Posterr<PaperAirplaneIcon className="h-6 w-6 ml-2 text-gray-800 " />
+        </button>
       </form>
-
+      {/* 
       {!!quotedPost && (
         <div className="post--quoted flex gap-4 p-4">
           <Avatar firstName={quotedPost?.user?.firstName?.charAt(0) || 'X'} lastName={quotedPost?.user?.lastName?.charAt(0) || 'X'} />
@@ -44,7 +51,8 @@ const PostAdd = ({ typeOfPost }) => {
           </div>
         </div>
       )}
-
+      */}
+      <hr class="block border-t border-gray-200 my-4" />
     </div>
   );
 }
