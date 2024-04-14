@@ -1,13 +1,16 @@
+import { ArrowPathRoundedSquareIcon, ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { usePosts } from "../../context/UserContext";
 import Avatar from "../avatar/Avatar";
 import Message from "../message/Message";
-import { useEffect, useState } from "react";
-import { ArrowPathRoundedSquareIcon, ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
+import UserProfileInfo from "../user/UserProfileInfo";
+import { useModal } from "../modal/ModalContext";
 
 const PostList = () => {
   const { profileInfo, posts, collection, onAddPost, onAddQuotedPost } = usePosts();
   const [postCollection, setPostCollection] = useState();
+  const { openModal } = useModal();
 
   const addRepost = (postBody) => {
     const post = {
@@ -49,9 +52,9 @@ const PostList = () => {
               <div className="flex flex-col gap-3 p-4">
                 <div className="post--header flex flex-wrap justify-between gap-3 ">
                   <div className="flex items-center">
-                    <Link className={`post-toogle-link ${post?.user?.userId === profileInfo?.userId ? 'isDisabled' : ''} `} disabled={post?.user?.userId === profileInfo?.userId} to={`/profile/${post?.user?.userId}`}  >
+                    <button onClick={() => { openModal('teste') }} className={`post-toogle-link ${post?.user?.userId === profileInfo?.userId ? 'isDisabled' : ''} `} disabled={post?.user?.userId === profileInfo?.userId}  >
                       <Avatar firstName={post?.user?.firstName?.charAt(0) || 'X'} lastName={post?.user?.lastName?.charAt(0) || 'X'} />
-                    </Link>
+                    </button>
 
                     <h4 className="post--header--name ml-4 text-body hover:opacity-75 active:opacity-50 hover:text-body font-medium">
                       {post?.user?.firstName} {post?.user?.lastName}
@@ -64,7 +67,7 @@ const PostList = () => {
                     (post?.user?.userId === profileInfo?.userId && post?.typeOfPost === 'quote') ?
                     'flex items-center' : 'hidden'
                     } bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 rounded dark:bg-blue-900 dark:text-blue-300`}>
-                    
+
                     <ArrowPathRoundedSquareIcon className="w-4 h-4" />
                     <span className={`hidden text-xs sm:inline-block ml-2 `}>You reposterrted</span>
                   </div>
@@ -78,9 +81,9 @@ const PostList = () => {
                   <>
                     <div className="flex flex-col gap-3 mx-3 p-3 border border-gray-200 rounded-xl">
                       <div className="post--header flex gap-3 items-center">
-                        <Link className={`post-toogle-link ${post?.user?.userId === profileInfo?.userId ? 'isDisabled' : ''} `} disabled={post?.user?.userId === profileInfo?.userId} to={`/profile/${post?.user?.userId}`}  >
+                        <button onClick={() => { openModal(<UserProfileInfo />) }} className={`post-toogle-link ${post?.user?.userId === profileInfo?.userId ? 'isDisabled' : ''} `} disabled={post?.user?.userId === profileInfo?.userId} >
                           <Avatar firstName={post?.quotedPost?.user?.firstName?.charAt(0) || 'X'} lastName={post?.quotedPost?.user?.lastName?.charAt(0) || 'X'} />
-                        </Link>
+                        </button>
                         <div className="post--header--name">
                           <h4 className="font-semibold">{post?.quotedPost?.user?.firstName} {post?.quotedPost?.user?.lastName}</h4>
                         </div>
@@ -103,7 +106,7 @@ const PostList = () => {
                 </button>
               </div>
 
-              <hr class="block border-t border-gray-200 my-4" />
+              <hr className="block border-t border-gray-200 my-4" />
             </li>
           ))}
         </ul>

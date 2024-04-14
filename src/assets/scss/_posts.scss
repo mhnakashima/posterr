@@ -15,6 +15,19 @@
     }
   }
 
+  &--add {
+    &--charbar {
+      transition: all 0.2s linear;
+
+      .tracking {
+        transition: all 0.2s linear;
+      }
+
+      .bar {
+      }
+    }
+  }
+
   &--list {
     li {
       &:last-child {

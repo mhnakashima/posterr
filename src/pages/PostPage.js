@@ -9,6 +9,7 @@ import PostQuote from "../components/posts/PostQuote";
 import Header from "../components/header/Header";
 import Modal from "../components/modal/Modal";
 import PostAdd from "../components/posts/PostAdd";
+import { ModalProvider } from "../components/modal/ModalContext";
 
 const PostPage = () => {
   const { collection, profile } = useParams();
@@ -55,6 +56,7 @@ const PostPage = () => {
   }
 
   return (
+
     <div className="page w-full h-full">
       <Header />
 
@@ -62,14 +64,14 @@ const PostPage = () => {
         <section className="flex flex-wrap justify-center w-full flex gap-12">
           <div className="w-full">
             <UserProfileInfo />
-            <hr class="block border-t border-gray-200 my-1" />
+            <hr className="block border-t border-gray-200 my-1" />
             <PostAdd />
-
             <PostContainer />
           </div>
         </section>
       </main>
 
+      {/* 
       {
         !!userProfile && (
           <>
@@ -89,7 +91,10 @@ const PostPage = () => {
         )
 
       }
+      */}
+      <Modal />
     </div>
+    
   );
 }
 

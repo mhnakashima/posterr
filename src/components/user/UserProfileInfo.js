@@ -24,10 +24,10 @@ const UserProfileInfo = () => {
         <section className="flex flex-col gap-3 p-4">
             <div className=" flex items-center">
                 {/* User Avatar */}
-                <Avatar firstName={profileInfo?.firstName} lastName={profileInfo.lastName} />
+                <Avatar firstName={profileInfo?.firstName || 'x'} lastName={profileInfo?.lastName || 'x'} />
                 {/* User Name */}
                 <div className="ml-2">
-                    <h2 className="text-medium font-semibold">{profileInfo.firstName} {profileInfo.lastName}</h2>
+                    <h2 className="text-medium font-semibold">{profileInfo?.firstName || 'x'} {profileInfo.lastName || 'x'}</h2>
                 </div>
             </div>
 
