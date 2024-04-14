@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./components/footer/Footer";
-import { ModalProvider } from "./components/modal/ModalContext";
 import { UserProvider } from "./context/UserContext";
 import PostPage from "./pages/PostPage";
 import { createFakeConfiguration } from "./utils/utils";
-import Modal from "./components/modal/Modal";
+import { ModalProvider } from "./context/ModalContext";
 
 const App = () => {
   const [user, setUser] = useState(createFakeConfiguration());

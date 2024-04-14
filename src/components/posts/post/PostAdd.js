@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
-import { POSTERR_MAX_CHAR_POST_LENGTH, POSTERR_MIN_INPUT_LENGTH } from "../../api/constants";
-import { usePosts } from "../../context/UserContext";
-import Avatar from "../avatar/Avatar";
+import { POSTERR_MAX_CHAR_POST_LENGTH, POSTERR_MIN_INPUT_LENGTH } from "../../../api/constants";
+import { usePosts } from "../../../context/UserContext";
+import Avatar from "../../avatar/Avatar";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 
 const PostAdd = ({ typeOfPost }) => {

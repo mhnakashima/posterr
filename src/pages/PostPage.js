@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import PostContainer from "../containers/PostContainer";
-import { usePosts } from "../context/UserContext";
-import PostToogle from "../components/posts/PostToogle";
-import UserProfile from "../components/user/UserProfile";
-import UserProfileInfo from "../components/user/UserProfileInfo";
-import PostQuote from "../components/posts/PostQuote";
 import Header from "../components/header/Header";
 import Modal from "../components/modal/Modal";
-import PostAdd from "../components/posts/PostAdd";
-import { ModalProvider } from "../components/modal/ModalContext";
+import PostAdd from "../components/posts/post/PostAdd";
+import UserProfileInfo from "../components/user/Profile";
+import PostContainer from "../containers/PostContainer";
+import { usePosts } from "../context/UserContext";
 
 const PostPage = () => {
   const { collection, profile } = useParams();
@@ -71,27 +67,6 @@ const PostPage = () => {
         </section>
       </main>
 
-      {/* 
-      {
-        !!userProfile && (
-          <>
-            <Modal isOpen={userProfile} onClose={onCloseModal}>
-              {!!userProfile && (<UserProfile userData={userProfile} />)}
-            </Modal>
-          </>
-        )
-      }
-      {
-        !!userQuotedPost && (
-          <>
-            <Modal isOpen={userQuotedPost} onClose={onCloseModal}>
-              {!!quotedPost && (<PostQuote typeOfPost='quote' />)}
-            </Modal>
-          </>
-        )
-
-      }
-      */}
       <Modal />
     </div>
     

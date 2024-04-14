@@ -19,6 +19,8 @@ const generateFirstUserData = () => {
     lastName: faker.name.lastName(),
   }
 
+  user.userName = `@${faker.internet.userName(user.firstName, user.lastName)}`;
+
   const posts = Array.from({length: POSTERR_NUM_OF_POSTS}, () => {
     return {
       postBody: faker.hacker.phrase(),
@@ -40,6 +42,11 @@ const generateFirstUserData = () => {
       }
     }
   });
+
+  posts.map(post => {
+    post.user = {...post.user, userName: `@${faker.internet.userName(post.user.firstName, post.user.lastName)}`}
+  })
+  
 
   return {
     ...user, posts

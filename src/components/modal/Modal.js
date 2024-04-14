@@ -1,7 +1,8 @@
 // Modal.js
 import React from 'react';
-import { useModal } from './ModalContext';
+import { useModal } from './../../context/ModalContext';
 import { createPortal } from 'react-dom';
+import { XCircleIcon } from '@heroicons/react/24/outline';
 
 const Modal = () => {
   const { isModalOpen, closeModal, modalContent } = useModal();
@@ -13,16 +14,14 @@ const Modal = () => {
           <div className="relative bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
             <div className="flex items-start justify-between p-1 rounded-t">
               <button
-                className="p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                className="ml-auto bg-transparent border-0 "
                 onClick={closeModal}
               >
-                <span className="bg-transparent text-black h-6 w-6 text-2xl block outline-none focus:outline-none">
-                  ×
-                </span>
+                <XCircleIcon className='w-8 h-8 hover:text-blue-500' />
               </button>
             </div>
             {/* Body */}
-            <div className="relative p-3 flex">{modalContent}</div>
+            <div className="relative p-4 flex">{modalContent}</div>
           </div>
         </div>
         <div className="fixed inset-0 z-40 bg-black opacity-50"></div>

@@ -8,7 +8,6 @@ export const ModalProvider = ({ children }) => {
   const [modalContent, setModalContent] = useState(null);
 
   const openModal = (content) => {
-    console.log('I should be called', content);
     setModalContent(content);
     setIsModalOpen(true);
   };
