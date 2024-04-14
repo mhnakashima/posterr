@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useModal } from "../../context/ModalContext";
 import { usePosts } from "../../context/UserContext";
-import Message from "../message/Message";
 import UserProfile from "../user/UserProfile";
 import PostToolbar from "./PostToolbar";
 import Post from "./view/Post";
 import Quote from "./view/Quote";
+import MessageInfo from "../message/MessageInfo";
 
 const PostList = () => {
   const { profileInfo, posts, collection, onAddPost, onAddQuotedPost } = usePosts();
@@ -74,7 +74,10 @@ const PostList = () => {
           ))}
         </ul>
       ) : (
-        <Message />
+        <MessageInfo 
+          messageInfoHeaderText={'Information'}
+          messageInfoBodyText={"There's no post available. What do you think to click on all posts and see what the community has been posting?"}
+        />
       )}
     </>
   );

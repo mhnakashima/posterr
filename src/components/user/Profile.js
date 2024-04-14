@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { usePosts } from "../../context/UserContext";
-import Avatar from "../avatar/Avatar";
 import FollowData from "../follow/FollowData";
+import ProfileHeader from "./profileHeader/ProfileHeader";
 
 const Profile = () => {
 
@@ -23,15 +23,12 @@ const Profile = () => {
 
     return (
         <section className="flex flex-col gap-3 p-4">
-            <div className=" flex items-center">
-                {/* User Avatar */}
-                <Avatar firstName={profileInfo?.firstName || 'x'} lastName={profileInfo?.lastName || 'x'} />
-                {/* User Name */}
-                <div className="ml-2">
-                    <h2 className="text-medium font-semibold">{profileInfo?.firstName || 'x'} {profileInfo.lastName || 'x'}</h2>
-                </div>
-                <span className="ml-2">{profileInfo.userName}</span>
-            </div>
+            
+            <ProfileHeader 
+                firstName={profileInfo?.firstName || 'x'}
+                lastName={profileInfo?.lastName || 'x'}
+                userName={profileInfo?.userName || 'x'}
+            />
 
             {/* Following, Followers, and Number of Posts Row */}
             <FollowData

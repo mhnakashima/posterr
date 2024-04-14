@@ -1,0 +1,15 @@
+.userProfile{
+    .post {
+        &--list{
+            li{
+                &:last-child{
+                    margin-bottom: 2em;
+
+                    hr{
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

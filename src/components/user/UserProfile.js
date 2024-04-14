@@ -1,9 +1,11 @@
+import { useModal } from "../../context/ModalContext";
 import { usePosts } from "../../context/UserContext";
 import Avatar from "../avatar/Avatar";
 import FollowButton from "../follow/FollowButton";
 import FollowData from "../follow/FollowData";
 import PostToolbar from "../posts/PostToolbar";
 import Post from "../posts/view/Post";
+import ProfileHeader from "./profileHeader/ProfileHeader";
 
 const UserProfile = ({ userData }) => {
 
@@ -13,8 +15,11 @@ const UserProfile = ({ userData }) => {
         onAddFollower
     } = usePosts();
 
+    const { closeModal } = useModal();
+
     const handleOnClickFollowUser = (isFollowing) => {
         onAddFollower(userData?.userId, isFollowing);
+        closeModal();
     }
 
     const addRepost = (body) => {
@@ -43,14 +48,11 @@ const UserProfile = ({ userData }) => {
                 <div className="px-4">
                     <div className="flex items-center">
                         {/* User Avatar */}
-                        <div className="flex items-center">
-                            <Avatar firstName={userData?.firstName || 'x'} lastName={userData?.lastName || 'x'} />
-                            {/* User Name */}
-                            <div className="ml-2">
-                                <h2 className="text-medium font-semibold">{userData?.firstName || 'x'} {userData?.lastName || 'x'}</h2>
-                            </div>
-                            <span className="ml-2">{userData?.userName}</span>
-                        </div>
+                        <ProfileHeader 
+                            firstName={userData?.firstName || 'x'}
+                            lastName={userData?.lastName || 'x'}
+                            userName={userData?.userName || 'x'}
+                        />
 
                         <div className="ml-auto">
                             <FollowButton
@@ -74,12 +76,11 @@ const UserProfile = ({ userData }) => {
                 </div>
 
                 <div className="h-64 overflow-y-auto mt-4">
-                    <div className="p-4">
-                        <ul>
+                    <div className="px-0 sm:px-4">
+                        <ul className="post--list">
                             {userData?.posts?.map((post, index) => (
                                 <li
                                     key={`post-${userData?.userId}-${index}`}
-                                    className="user-post"
                                 >
                                     <Post 
                                         post={

@@ -91,7 +91,7 @@ const UserProvider = ({ user, children, isTestingPosterr }) =>{
   const handleAddFollower = useCallback((userId, isFollowing) => {
     const updatedPosts = posts.map(post => {
       if(post.user.userId === userId){
-        return { ...post, user: { ...post.user, isFollowing } };
+        return { ...post, user: { ...post.user, isFollowing: !isFollowing } };
       }
 
       return post;

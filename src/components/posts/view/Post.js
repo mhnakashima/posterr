@@ -29,7 +29,7 @@ const Post = ({post, onClickCallback, isDisabled}) => {
                 </div>
             </div>
             <div className="poster--body">
-                <p className="flex-auto m1-2 pb-4">{post?.postBody}</p>
+                <p className="flex-auto m1-2">{post?.postBody}</p>
             </div>
         </div>
     )

@@ -24,7 +24,7 @@ const generateFirstUserData = () => {
   const posts = Array.from({length: POSTERR_NUM_OF_POSTS}, () => {
     return {
       postBody: faker.hacker.phrase(),
-      typeOfPost: faker.helpers.arrayElement(['repost', 'quote', 'post']),
+      typeOfPost: faker.helpers.arrayElement(['post']),
       user: {
         userId: faker.datatype.uuid(),
         firstName: faker.name.firstName(),
@@ -36,7 +36,7 @@ const generateFirstUserData = () => {
         posts: Array.from({length: POSTERR_NUM_OF_POSTS}, () => {
           return {
             postBody: faker.hacker.phrase(),
-            typeOfPost: faker.helpers.arrayElement(['repost', 'quote', 'post'])
+            typeOfPost: 'post'
           }
         }),
       }
@@ -44,7 +44,10 @@ const generateFirstUserData = () => {
   });
 
   posts.map(post => {
-    post.user = {...post.user, userName: `@${faker.internet.userName(post.user.firstName, post.user.lastName)}`}
+    post.user = {
+      ...post.user, 
+      userName: `@${faker.internet.userName(post.user.firstName, post.user.lastName)}`
+    }
   })
   
 

@@ -1,5 +1,5 @@
 const Footer = () => {
-    return <footer className="mb-4 mt-16 text-center">&copy; by Posterr - mhnakashima </footer>;
+    return <footer className="my-6 text-center">&copy; by Posterr - mhnakashima </footer>;
 }
 
 export default Footer;

@@ -57,17 +57,6 @@ const PostAdd = ({ typeOfPost }) => {
           </button>
         </div>
       </form>
-      {/* 
-      {!!quotedPost && (
-        <div className="post--quoted flex gap-4 p-4">
-          <Avatar firstName={quotedPost?.user?.firstName?.charAt(0) || 'X'} lastName={quotedPost?.user?.lastName?.charAt(0) || 'X'} />
-          <div className="">
-            <h4 className="mb-2 font-semibold">{quotedPost?.user?.firstName} {quotedPost?.user?.lastName}</h4>
-            <p className="flex-auto m1-2 pb-4">{quotedPost?.postBody}</p>
-          </div>
-        </div>
-      )}
-      */}
       <hr className="block border-t border-gray-200 my-4" />
     </div>
   );
