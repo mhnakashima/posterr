@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { usePosts } from "../../context/UserContext";
+import { usePosts } from "../../context/PostsContext";
 
 const PostToogle = () => {
 

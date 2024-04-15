@@ -1,5 +1,5 @@
 import { useModal } from "../../context/ModalContext";
-import { usePosts } from "../../context/UserContext";
+import { usePosts } from "../../context/PostsContext";
 import Avatar from "../avatar/Avatar";
 import FollowButton from "../follow/FollowButton";
 import FollowData from "../follow/FollowData";

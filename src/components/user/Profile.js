@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import { usePosts } from "../../context/UserContext";
+import { usePosts } from "../../context/PostsContext";
 import FollowData from "../follow/FollowData";
 import ProfileHeader from "./profileHeader/ProfileHeader";
+import { useProfile } from "../../context/UserContext";
 
 const Profile = () => {
 
-    const { profileInfo, posts } = usePosts();
+    const { posts } = usePosts();
     const [numOfFollowers, setNumOfFollowers] = useState(0);
     const [numOfFollowing, setNumOfFollowing] = useState(0);
     const [numOfPosts, setNumOfPosts] = useState(0);
+    const { profileInfo } = useProfile();
 
     useEffect(() => {
         if (!posts) {

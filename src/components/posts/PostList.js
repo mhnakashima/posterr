@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useModal } from "../../context/ModalContext";
-import { usePosts } from "../../context/UserContext";
+import { usePosts } from "../../context/PostsContext";
 import UserProfile from "../user/UserProfile";
 import PostToolbar from "./PostToolbar";
 import Post from "./view/Post";
 import Quote from "./view/Quote";
 import MessageInfo from "../message/MessageInfo";
 import PostQuote from "./post/PostQuote";
+import { useProfile } from "../../context/UserContext";
 
 const PostList = () => {
-  const { profileInfo, posts, collection, onAddPost } = usePosts();
+  const { profileInfo } = useProfile();
+  const { posts, collection, onAddPost } = usePosts();
   const [postCollection, setPostCollection] = useState();
   const { openModal } = useModal();
 
@@ -64,7 +66,7 @@ const PostList = () => {
                       postBody: post.postBody,
                       user: post?.user,
                       typeOfPost: 'quote'
-                    }} typeOfPost={'quote'} 
+                    }} typeOfPost={'quote'}
                   />)
                 }}
                 repostCallback={() => { addRepost(post?.postBody) }}

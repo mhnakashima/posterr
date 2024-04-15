@@ -4,8 +4,8 @@ import Header from "../components/header/Header";
 import Modal from "../components/modal/Modal";
 import PostAdd from "../components/posts/post/PostAdd";
 import UserProfileInfo from "../components/user/Profile";
-import PostContainer from "../containers/PostContainer";
-import { usePosts } from "../context/UserContext";
+import { usePosts } from "../context/PostsContext";
+import PostContainer from "../features/PostContainer";
 
 const PostPage = () => {
   const { collection, profile } = useParams();
@@ -69,7 +69,7 @@ const PostPage = () => {
 
       <Modal />
     </div>
-    
+
   );
 }
 

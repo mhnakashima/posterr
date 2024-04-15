@@ -1,13 +1,15 @@
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { useCallback, useState } from "react";
 import { POSTERR_MAX_CHAR_POST_LENGTH, POSTERR_MIN_INPUT_LENGTH } from "../../../api/constants";
-import { usePosts } from "../../../context/UserContext";
+import { usePosts } from "../../../context/PostsContext";
 import { useModal } from "../../../context/ModalContext";
+import { useProfile } from "../../../context/UserContext";
 
 const PostAdd = ({ quotedPost, typeOfPost }) => {
-  const { profileInfo, onAddPost } = usePosts();
+  const { onAddPost } = usePosts();
   const [body, setBody] = useState("");
   const { isModalOpen, closeModal } = useModal();
+  const { profileInfo } = useProfile();
 
   const handleSubmit = function (e) {
     e.preventDefault();

@@ -3,7 +3,7 @@ import Avatar from "../../avatar/Avatar";
 const Quote = ({ post, onClickCallback, isDisabled }) => {
     return (
         <>
-            <div className="flex flex-col gap-3 mx-3 p-3 border border-gray-200 rounded-xl">
+            <div className="flex flex-col gap-3 mx-3 mb-3 p-3 border border-gray-200 rounded-xl">
                 <div className="post--header flex gap-3 items-center">
                     <button
                         onClick={() => { onClickCallback() }}
