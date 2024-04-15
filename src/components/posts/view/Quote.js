@@ -10,14 +10,14 @@ const Quote = ({ post, onClickCallback, isDisabled }) => {
                         className={`post-toogle-link ${isDisabled ? 'isDisabled' : ''} `}
                         disabled={isDisabled}
                     >
-                        <Avatar firstName={post?.quotedPost?.user?.firstName?.charAt(0) || 'X'} lastName={post?.quotedPost?.user?.lastName?.charAt(0) || 'X'} />
+                        <Avatar firstName={post?.user?.firstName?.charAt(0) || 'X'} lastName={post?.user?.lastName?.charAt(0) || 'X'} />
                     </button>
                     <div className="post--header--name">
-                        <h4 className="font-semibold">{post?.quotedPost?.user?.firstName} {post?.quotedPost?.user?.lastName}</h4>
+                        <h4 className="font-semibold">{post?.user?.firstName} {post?.user?.lastName}</h4>
                     </div>
                 </div>
                 <div className="poster--body">
-                    <p className="flex-auto m1-2 pb-4">{post?.quotedPost?.postBody}</p>
+                    <p className="flex-auto m1-2 pb-4">{post?.postBody}</p>
                 </div>
             </div>
         </>

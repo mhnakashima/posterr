@@ -1,12 +1,13 @@
+import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { useCallback, useState } from "react";
 import { POSTERR_MAX_CHAR_POST_LENGTH, POSTERR_MIN_INPUT_LENGTH } from "../../../api/constants";
 import { usePosts } from "../../../context/UserContext";
-import Avatar from "../../avatar/Avatar";
-import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
+import { useModal } from "../../../context/ModalContext";
 
-const PostAdd = ({ typeOfPost }) => {
-  const { profileInfo, quotedPost, onAddPost } = usePosts();
+const PostAdd = ({ quotedPost, typeOfPost }) => {
+  const { profileInfo, onAddPost } = usePosts();
   const [body, setBody] = useState("");
+  const { isModalOpen, closeModal } = useModal();
 
   const handleSubmit = function (e) {
     e.preventDefault();
@@ -14,12 +15,17 @@ const PostAdd = ({ typeOfPost }) => {
 
     const post = {
       postBody: body,
-      user: quotedPost ? quotedPost.user : profileInfo,
-      typeOfPost: typeOfPost || 'post'
+      user: profileInfo,
+      typeOfPost: typeOfPost || 'post',
+      quotedPost
     }
 
     onAddPost(post);
     setBody("");
+
+    if(isModalOpen){
+      closeModal();
+    }
   };
 
   const validateSizeOfBody = useCallback((inputData) => {

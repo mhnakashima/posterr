@@ -3,6 +3,7 @@ import { usePosts } from "../../context/UserContext";
 import Avatar from "../avatar/Avatar";
 import FollowButton from "../follow/FollowButton";
 import FollowData from "../follow/FollowData";
+import PostQuote from "../posts/post/PostQuote";
 import PostToolbar from "../posts/PostToolbar";
 import Post from "../posts/view/Post";
 import ProfileHeader from "./profileHeader/ProfileHeader";
@@ -15,7 +16,7 @@ const UserProfile = ({ userData }) => {
         onAddFollower
     } = usePosts();
 
-    const { closeModal } = useModal();
+    const { openModal, closeModal } = useModal();
 
     const handleOnClickFollowUser = (isFollowing) => {
         onAddFollower(userData?.userId, isFollowing);
@@ -30,16 +31,6 @@ const UserProfile = ({ userData }) => {
         }
 
         onAddPost(post);
-    }
-
-    const addQuotePost = (quotedPost) => {
-        const post = {
-            postBody: quotedPost.postBody,
-            user: userData,
-            typeOfPost: 'quote'
-        }
-
-        onAddQuotedPost(post);
     }
 
     return (
@@ -97,7 +88,20 @@ const UserProfile = ({ userData }) => {
                                     />
 
                                     <PostToolbar
-                                        quotePostCallback={() => { addQuotePost(post) }}
+                                        quotePostCallback={() => {
+                                            closeModal();
+                                            openModal(<PostQuote
+                                              post={{
+                                                postBody: post.postBody,
+                                                user: {
+                                                    firstName: userData?.firstName,
+                                                    lastName: userData?.lastName,
+                                                    userName: userData?.userName
+                                                },
+                                                typeOfPost: 'quote'
+                                              }} typeOfPost={'quote'} 
+                                            />)
+                                          }}
                                         repostCallback={() => { addRepost(post?.postBody) }}
                                     />
 

@@ -6,9 +6,10 @@ import PostToolbar from "./PostToolbar";
 import Post from "./view/Post";
 import Quote from "./view/Quote";
 import MessageInfo from "../message/MessageInfo";
+import PostQuote from "./post/PostQuote";
 
 const PostList = () => {
-  const { profileInfo, posts, collection, onAddPost, onAddQuotedPost } = usePosts();
+  const { profileInfo, posts, collection, onAddPost } = usePosts();
   const [postCollection, setPostCollection] = useState();
   const { openModal } = useModal();
 
@@ -22,16 +23,6 @@ const PostList = () => {
     onAddPost(post);
   }
 
-  const addQuotePost = (quotedPost) => {
-    const post = {
-      postBody: quotedPost.postBody,
-      user: quotedPost?.user,
-      typeOfPost: 'quote'
-    }
-
-    onAddQuotedPost(post);
-  }
-
   useEffect(() => {
     let updatedPosts;
     if (collection !== "following") {
@@ -39,6 +30,8 @@ const PostList = () => {
     } else {
       updatedPosts = posts.filter(post => post.user?.isFollowing);
     }
+
+    console.log('>>>', updatedPosts);
 
     setPostCollection(updatedPosts);
   }, [posts, collection])
@@ -57,7 +50,7 @@ const PostList = () => {
               {
                 post?.quotedPost && (
                   <Quote
-                    post={post}
+                    post={post?.quotedPost}
                     isDisabled={post?.user?.userId === profileInfo?.userId}
                     onClickCallback={() => { openModal(<UserProfile userData={post?.user} />) }}
                   />
@@ -65,8 +58,16 @@ const PostList = () => {
               }
 
               <PostToolbar
-                quotePostCallback={() => { addQuotePost(post) }}
-                repostCallback={() => { addRepost(post?.postBody) }} 
+                quotePostCallback={() => {
+                  openModal(<PostQuote
+                    post={{
+                      postBody: post.postBody,
+                      user: post?.user,
+                      typeOfPost: 'quote'
+                    }} typeOfPost={'quote'} 
+                  />)
+                }}
+                repostCallback={() => { addRepost(post?.postBody) }}
               />
 
               <hr className="block border-t border-gray-200 my-4" />
@@ -74,7 +75,7 @@ const PostList = () => {
           ))}
         </ul>
       ) : (
-        <MessageInfo 
+        <MessageInfo
           messageInfoHeaderText={'Information'}
           messageInfoBodyText={"There's no post available. What do you think to click on all posts and see what the community has been posting?"}
         />

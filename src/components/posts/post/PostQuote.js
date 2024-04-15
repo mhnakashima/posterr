@@ -1,9 +1,11 @@
+import Quote from "../view/Quote";
 import PostAdd from "./PostAdd";
 
-const PostQuote = ({typeOfPost}) => {
+const PostQuote = ({post}) => {
     return(
         <div>
-            <PostAdd typeOfPost={typeOfPost} />
+            <PostAdd quotedPost={post} typeOfPost={post.typeOfPost} />
+            <Quote post={post} isDisabled={true}  />
         </div>
     )
 }

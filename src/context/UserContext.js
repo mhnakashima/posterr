@@ -62,18 +62,8 @@ const UserProvider = ({ user, children, isTestingPosterr }) =>{
   const handleAddPost = useCallback((post) => {
     
     let updatedPosts;
+    updatedPosts = [post, ...posts];
     
-    if(post.typeOfPost === 'quote'){
-      const newPost = {
-        ...post, user, quotedPost
-      }
-    
-      updatedPosts = [newPost, ...posts];
-    }else{
-      updatedPosts = [post, ...posts];
-    }
-
-    setQuotedPost(undefined)
     setPosts(updatedPosts);
     saveData(updatedPosts);
 

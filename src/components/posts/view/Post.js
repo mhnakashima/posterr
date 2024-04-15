@@ -11,8 +11,8 @@ const Post = ({post, onClickCallback, isDisabled}) => {
                         <Avatar firstName={post?.user?.firstName?.charAt(0) || 'X'} lastName={post?.user?.lastName?.charAt(0) || 'X'} />
                     </button>
 
-                    <h4 className="post--header--name ml-4 text-body hover:opacity-75 active:opacity-50 hover:text-body font-medium">
-                        {post?.user?.firstName} {post?.user?.lastName}
+                    <h4 className="post--header--name ml-2 text-body hover:opacity-75 active:opacity-50 hover:text-body font-medium ">
+                        <div>{post?.user?.firstName} {post?.user?.lastName}</div>
                     </h4>
 
                     <span className="hidden sm:inline-block ml-2">{post?.user?.userName}</span>
@@ -25,7 +25,7 @@ const Post = ({post, onClickCallback, isDisabled}) => {
                     } bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 rounded dark:bg-blue-900 dark:text-blue-300`}>
 
                     <ArrowPathRoundedSquareIcon className="w-4 h-4" />
-                    <span className={`hidden text-xs sm:inline-block ml-2 `}>You reposterrted</span>
+                    <span className={`hidden text-xs sm:inline-block`}></span>
                 </div>
             </div>
             <div className="poster--body">
