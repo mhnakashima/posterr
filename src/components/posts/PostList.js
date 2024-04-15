@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useModal } from "../../context/ModalContext";
 import { usePosts } from "../../context/PostsContext";
 import UserProfile from "../user/UserProfile";
@@ -8,12 +8,14 @@ import Quote from "./view/Quote";
 import MessageInfo from "../message/MessageInfo";
 import PostQuote from "./post/PostQuote";
 import { useProfile } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const PostList = () => {
   const { profileInfo } = useProfile();
   const { posts, collection, onAddPost } = usePosts();
   const [postCollection, setPostCollection] = useState();
-  const { openModal } = useModal();
+  const { openModal, isOpenModal } = useModal();
+  const navigate = useNavigate();
 
   const addRepost = (postBody) => {
     const post = {
@@ -33,10 +35,12 @@ const PostList = () => {
       updatedPosts = posts.filter(post => post.user?.isFollowing);
     }
 
-    console.log('>>>', updatedPosts);
-
     setPostCollection(updatedPosts);
-  }, [posts, collection])
+  }, [posts, collection, isOpenModal])
+
+  const setProfileRoute = useCallback((profileId) => {
+    navigate(`/profile/${profileId}`);
+  }, []);
 
   return (
     <>
@@ -47,7 +51,10 @@ const PostList = () => {
               <Post
                 post={post}
                 isDisabled={post?.user?.userId === profileInfo?.userId}
-                onClickCallback={() => { openModal(<UserProfile userData={post?.user} />) }}
+                onClickCallback={() => { 
+                  setProfileRoute(post?.user?.userId);
+                  openModal(<UserProfile userData={post?.user} />) 
+                }}
               />
               {
                 post?.quotedPost && (
@@ -61,6 +68,7 @@ const PostList = () => {
 
               <PostToolbar
                 quotePostCallback={() => {
+                  setProfileRoute(post?.user?.userId);
                   openModal(<PostQuote
                     post={{
                       postBody: post.postBody,
