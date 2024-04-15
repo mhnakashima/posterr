@@ -40,7 +40,7 @@ const PostList = () => {
 
   const setProfileRoute = useCallback((profileId) => {
     navigate(`/profile/${profileId}`);
-  }, []);
+  }, [navigate]);
 
   return (
     <>

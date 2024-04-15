@@ -10,23 +10,11 @@ import PostContainer from "../features/PostContainer";
 const PostPage = () => {
   const { collection, profile } = useParams();
   const { profileInfo, posts, quotedPost, setCollection } = usePosts();
-  const [userProfile, setUserProfile] = useState();
   const [userQuotedPost, setUserQuotedPost] = useState();
 
   useEffect(() => {
     if (collection) {
       setCollection(collection);
-    }
-
-    /*
-      Open modal from profile
-    */
-    if (profile) {
-      const userProfileData = posts.find((post => post?.user?.userId === profile))?.user;
-
-      if (userProfileData || userProfileData?.userId === profileInfo?.userId) {
-        setUserProfile(userProfileData);
-      }
     }
 
     /*
@@ -38,18 +26,12 @@ const PostPage = () => {
         It should be refactored, to open a modal
         is necessary only if it's open, the content and close behaviour
       */
-      setUserProfile(undefined);
       setUserQuotedPost(quotedPost);
     } else {
       setUserQuotedPost();
     }
 
   }, [posts, userQuotedPost, quotedPost, collection, profile, profileInfo, setCollection]);
-
-  const onCloseModal = () => {
-    setUserProfile(undefined);
-    setUserQuotedPost(undefined);
-  }
 
   return (
 

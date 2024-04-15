@@ -10,7 +10,7 @@ const PostsProvider = ({ userProfile, children }) =>{
   const [posts, setPosts] = useState([{ postBody: '' }]);
   const [collection, setCollection] = useState('all');
   const [quotedPost, setQuotedPost] = useState(undefined);
-  const [user, setUser] = useState(userProfile);
+  const [user] = useState(userProfile);
   const [searchQuery, setSearchQuery] = useState("");
   
   /*
@@ -59,7 +59,7 @@ const PostsProvider = ({ userProfile, children }) =>{
     saveData(updatedPosts);
 
     // Handle the saved data
-  }, [quotedPost, user, posts, saveData]);
+  }, [ posts, saveData]);
 
   const handeQuotedPost = (post) => {
     setQuotedPost(post);
@@ -98,7 +98,7 @@ const PostsProvider = ({ userProfile, children }) =>{
       setSearchQuery,
       setCollection,
     };
-  },[collection, user, quotedPost, handleAddPost, handleAddFollower, searchedPosts, searchQuery]);
+  },[collection, quotedPost, handleAddPost, handleAddFollower, searchedPosts, searchQuery]);
 
   return (
     // All chidren should receive values from Post Content Provider

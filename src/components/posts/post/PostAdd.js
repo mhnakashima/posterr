@@ -32,7 +32,7 @@ const PostAdd = ({ quotedPost, typeOfPost }) => {
 
   const validateSizeOfBody = useCallback((inputData) => {
     setBody(inputData);
-  }, [body]);
+  }, []);
 
   return (
     <div className="sm:mb-4" >
