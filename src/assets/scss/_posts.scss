@@ -38,4 +38,16 @@
       }
     }
   }
+
+  &--header {
+    &--name {
+      a {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &--body {
+    word-break: break-all;
+  }
 }

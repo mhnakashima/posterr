@@ -54,5 +54,4 @@ and it removing the responsability of API to deal only to get the necessary info
 - This application can be divided in minor parts of code and every part can have its own deploy process
 (It might be done using module federalization).
 - It's nice to have repo with generic components (Storybook is a good approach)
-- I would like to refactor the layout to be more concise.
  

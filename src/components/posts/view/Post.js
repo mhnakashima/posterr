@@ -12,7 +12,7 @@ const Post = ({ post, onClickCallback, isDisabled }) => {
                     </button>
 
                     <h4 className="post--header--name ml-2 hover:opacity-75 active:opacity-50 hover:text-body ">
-                        <div className="font-medium text-body">{post?.user?.firstName} {post?.user?.lastName}</div>
+                        <a onClick={() => { onClickCallback() }} className={`post-toogle-link ${isDisabled ? 'isDisabled' : ''} font-medium text-body`} disabled={isDisabled}>{post?.user?.firstName} {post?.user?.lastName}</a>
                     </h4>
 
                     <span className="hidden sm:inline-block ml-2">{post?.user?.userName}</span>
@@ -33,7 +33,7 @@ const Post = ({ post, onClickCallback, isDisabled }) => {
                     </div>
                 </div>
             </div>
-            <div className="poster--body">
+            <div className="post--body">
                 <p className="flex-auto m1-2">{post?.postBody}</p>
             </div>
         </div>

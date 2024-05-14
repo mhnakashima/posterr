@@ -16,7 +16,7 @@ const Quote = ({ post, onClickCallback, isDisabled }) => {
                         <h4 className="font-semibold">{post?.user?.firstName} {post?.user?.lastName}</h4>
                     </div>
                 </div>
-                <div className="poster--body">
+                <div className="post--body">
                     <p className="flex-auto m1-2 pb-4">{post?.postBody}</p>
                 </div>
             </div>
