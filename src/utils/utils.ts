@@ -1,8 +1,8 @@
-import { POSTERR_LOCAL_STORAGE_KEY, POSTERR_NUM_OF_POSTS } from "../api/constants";
 import { faker } from '@faker-js/faker';
+import { POSTERR_LOCAL_STORAGE_KEY, POSTERR_NUM_OF_POSTS } from '../api/constants';
 
 function createFakeConfiguration() {
-  let userData = JSON.parse(window.localStorage.getItem(POSTERR_LOCAL_STORAGE_KEY));
+  let userData = JSON.parse(window.localStorage.getItem(POSTERR_LOCAL_STORAGE_KEY) ?? '{}');
 
   if (!userData) {
     userData = generateFirstUserData();
@@ -17,6 +17,7 @@ const generateFirstUserData = () => {
     userId: faker.datatype.uuid(),
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
+    userName: '',
   }
 
   user.userName = `@${faker.internet.userName(user.firstName, user.lastName)}`;
@@ -33,6 +34,7 @@ const generateFirstUserData = () => {
         isFollowing: false,
         numOfFollowers: faker.datatype.number({min: 0, max: 150}),
         numOfFollowing: faker.datatype.number({min: 0, max: 150}),
+        userName: '',
         posts: Array.from({length: POSTERR_NUM_OF_POSTS}, () => {
           return {
             postBody: faker.hacker.phrase(),
@@ -56,7 +58,7 @@ const generateFirstUserData = () => {
   }
 }
 
-const getInitials = (firstName, lastName) => {
+const getInitials = (firstName: string, lastName: string) => {
   return `${firstName.charAt(0)}${lastName.charAt(0)}`;
 };
 
