@@ -34,15 +34,15 @@ const UserProfilePage = () => {
         <Sidebar />
         <Header />
         <main className="lg:ml-16 pb-16 lg:pb-0">
-          <div className="max-w-[600px] mx-auto bg-white dark:bg-gray-900 p-8 text-center text-gray-500 dark:text-gray-400">
-            User not found.
+          <section className="max-w-[600px] mx-auto bg-white dark:bg-gray-900 p-8 text-center text-gray-500 dark:text-gray-400" aria-label="User not found">
+            <p>User not found.</p>
             <button
               onClick={() => navigate('/all')}
               className="block mx-auto mt-4 text-blue-500 hover:underline"
             >
               Go back
             </button>
-          </div>
+          </section>
         </main>
         <BottomNav />
       </div>
@@ -92,12 +92,12 @@ const UserProfilePage = () => {
 
       <main className="lg:ml-16 pb-16 lg:pb-0">
         <div className="max-w-[600px] mx-auto">
-          {/* Top bar */}
-          <div className="sticky top-0 lg:top-0 z-30 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-b border-gray-200/60 dark:border-gray-800">
+          <header className="sticky top-0 lg:top-0 z-30 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-b border-gray-200/60 dark:border-gray-800">
             <div className="flex items-center h-14 px-4 gap-4">
               <button
                 onClick={() => navigate(-1)}
                 className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                aria-label="Go back"
               >
                 <ArrowLeftIcon className="h-5 w-5 text-gray-700 dark:text-gray-300" />
               </button>
@@ -110,10 +110,9 @@ const UserProfilePage = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </header>
 
-          {/* Profile info */}
-          <div className="bg-white dark:bg-gray-900 px-4 pt-5 pb-4">
+          <section aria-label="Profile information" className="bg-white dark:bg-gray-900 px-4 pt-5 pb-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <Avatar
@@ -146,12 +145,11 @@ const UserProfilePage = () => {
                 following={isOwnProfile ? followingList : []}
               />
             </div>
-          </div>
+          </section>
 
-          {/* User's posts */}
-          <div className="mt-2">
+          <section aria-label="User posts" className="mt-2">
             {userPosts.length > 0 ? (
-              <div className="flex flex-col gap-px bg-gray-200/60 dark:bg-gray-800/60">
+              <ul aria-label="Posts" className="flex flex-col gap-px bg-gray-200/60 dark:bg-gray-800/60">
                 {userPosts.map((post, index) => {
                   const originalIndex = posts.indexOf(post);
                   const likes = post.likes ?? [];
@@ -160,7 +158,7 @@ const UserProfilePage = () => {
                   const isReposted = repostedBy.includes(profileInfo.userId);
 
                   return (
-                    <div key={`profile-post-${index}`} className="bg-white dark:bg-gray-900">
+                    <li key={`profile-post-${index}`} className="bg-white dark:bg-gray-900 list-none">
                       <Post
                         post={{
                           ...post,
@@ -192,16 +190,16 @@ const UserProfilePage = () => {
                           repostCallback={() => handleRepost(originalIndex)}
                         />
                       </Post>
-                    </div>
+                    </li>
                   );
                 })}
-              </div>
+              </ul>
             ) : (
-              <div className="bg-white dark:bg-gray-900 p-8 text-center text-gray-400 dark:text-gray-500">
+              <p className="bg-white dark:bg-gray-900 p-8 text-center text-gray-400 dark:text-gray-500">
                 No posts yet.
-              </div>
+              </p>
             )}
-          </div>
+          </section>
         </div>
       </main>
 

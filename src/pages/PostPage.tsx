@@ -33,9 +33,9 @@ const PostPage = () => {
 
       <main className="lg:ml-16 pb-16 lg:pb-0">
         <div className="max-w-[600px] mx-auto">
-          <div className="sticky top-0 lg:top-0 z-30 bg-white dark:bg-gray-900 rounded-b-2xl shadow-sm dark:shadow-gray-900/50 border-x border-b border-gray-200/60 dark:border-gray-800">
+          <header className="sticky top-0 lg:top-0 z-30 bg-white dark:bg-gray-900 rounded-b-2xl shadow-sm dark:shadow-gray-900/50 border-x border-b border-gray-200/60 dark:border-gray-800">
             <PostAdd />
-          </div>
+          </header>
           <PostContainer />
         </div>
       </main>

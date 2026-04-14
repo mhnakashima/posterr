@@ -43,7 +43,7 @@ const FollowData = ({
   };
 
   return (
-    <div className="flex items-center justify-between">
+    <section aria-label="Profile stats" className="flex items-center justify-between">
       {/* Stacked avatars + follower count */}
       <button
         onClick={handleOpenFollowers}
@@ -85,7 +85,7 @@ const FollowData = ({
           posts
         </span>
       </div>
-    </div>
+    </section>
   );
 };
 

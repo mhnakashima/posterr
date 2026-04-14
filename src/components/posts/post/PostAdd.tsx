@@ -61,7 +61,7 @@ const PostAdd = ({ quotedPost, typeOfPost }: PostAddProps) => {
   );
 
   return (
-    <div className="px-4 py-3">
+    <section className="px-4 py-3" aria-label="Create post">
       <form ref={formRef} onSubmit={handleSubmit}>
         <div className="flex items-start gap-3">
           <div className="pt-1">
@@ -130,7 +130,7 @@ const PostAdd = ({ quotedPost, typeOfPost }: PostAddProps) => {
           </button>
         </div>
       </form>
-    </div>
+    </section>
   );
 };
 

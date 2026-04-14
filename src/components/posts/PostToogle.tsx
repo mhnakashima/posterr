@@ -11,7 +11,7 @@ const PostToogle = () => {
   const { collection } = usePosts();
 
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-200/60 dark:border-gray-800 rounded-t-2xl overflow-hidden">
+    <nav aria-label="Post feed" className="bg-white dark:bg-gray-900 border border-gray-200/60 dark:border-gray-800 rounded-t-2xl overflow-hidden">
       <div className="flex">
         {tabs.map((tab) => (
           <Link
@@ -27,7 +27,7 @@ const PostToogle = () => {
           </Link>
         ))}
       </div>
-    </div>
+    </nav>
   );
 };
 

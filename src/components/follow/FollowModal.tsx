@@ -29,11 +29,12 @@ const FollowModal = ({
   };
 
   return (
-    <div>
-      {/* Tabs */}
-      <div className="flex border-b border-gray-200 dark:border-gray-700">
+    <section aria-label="Followers and following">
+      <nav aria-label="User list tabs" className="flex border-b border-gray-200 dark:border-gray-700">
         <button
           onClick={() => setActiveTab('followers')}
+          aria-selected={activeTab === 'followers'}
+          role="tab"
           className={`flex-1 py-3 text-sm font-semibold text-center transition-colors border-b-2 ${
             activeTab === 'followers'
               ? 'border-blue-500 text-blue-500'
@@ -44,6 +45,8 @@ const FollowModal = ({
         </button>
         <button
           onClick={() => setActiveTab('following')}
+          aria-selected={activeTab === 'following'}
+          role="tab"
           className={`flex-1 py-3 text-sm font-semibold text-center transition-colors border-b-2 ${
             activeTab === 'following'
               ? 'border-blue-500 text-blue-500'
@@ -52,9 +55,8 @@ const FollowModal = ({
         >
           Following ({following.length})
         </button>
-      </div>
+      </nav>
 
-      {/* User list */}
       {activeList.length > 0 ? (
         <ul className="max-h-80 overflow-y-scroll divide-y divide-gray-50 dark:divide-gray-800">
           {activeList.map((user, i) => (
@@ -80,11 +82,11 @@ const FollowModal = ({
           ))}
         </ul>
       ) : (
-        <div className="px-4 py-8 text-sm text-gray-400 dark:text-gray-500 text-center">
+        <p className="px-4 py-8 text-sm text-gray-400 dark:text-gray-500 text-center">
           No {activeTab} yet.
-        </div>
+        </p>
       )}
-    </div>
+    </section>
   );
 };
 

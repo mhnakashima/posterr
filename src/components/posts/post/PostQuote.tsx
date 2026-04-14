@@ -9,10 +9,10 @@ interface PostQuoteProps {
 
 const PostQuote = ({ post }: PostQuoteProps) => {
   return (
-    <div className="p-4">
+    <section className="p-4" aria-label="Quote post">
       <PostAdd quotedPost={post} typeOfPost={post.typeOfPost} />
       <Quote post={post} isDisabled={true} />
-    </div>
+    </section>
   );
 };
 

@@ -42,32 +42,38 @@ const RepostMenu = ({ onQuotePost, onRepost, isReposted = false }: RepostMenuPro
       </button>
 
       {isOpen && (
-        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-950/50 border border-gray-200 dark:border-gray-700 py-1 z-20">
-          <button
-            onClick={() => {
-              setIsOpen(false);
-              onQuotePost();
-            }}
-            className="flex items-center w-full px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-          >
-            <ChatBubbleLeftRightIcon className="h-4 w-4 mr-2 text-gray-500 dark:text-gray-400" />
-            Quote Post
-          </button>
-          <button
-            onClick={() => {
-              setIsOpen(false);
-              onRepost();
-            }}
-            className={`flex items-center w-full px-3 py-2 text-sm transition-colors ${
-              isReposted
-                ? 'text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-950'
-                : 'text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700'
-            }`}
-          >
-            <ArrowPathRoundedSquareIcon className={`h-4 w-4 mr-2 ${isReposted ? 'text-green-500 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'}`} />
-            {isReposted ? 'Undo Repost' : 'Repost'}
-          </button>
-        </div>
+        <ul role="menu" aria-label="Share options" className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-950/50 border border-gray-200 dark:border-gray-700 py-1 z-20">
+          <li role="none">
+            <button
+              role="menuitem"
+              onClick={() => {
+                setIsOpen(false);
+                onQuotePost();
+              }}
+              className="flex items-center w-full px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            >
+              <ChatBubbleLeftRightIcon className="h-4 w-4 mr-2 text-gray-500 dark:text-gray-400" />
+              Quote Post
+            </button>
+          </li>
+          <li role="none">
+            <button
+              role="menuitem"
+              onClick={() => {
+                setIsOpen(false);
+                onRepost();
+              }}
+              className={`flex items-center w-full px-3 py-2 text-sm transition-colors ${
+                isReposted
+                  ? 'text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-950'
+                  : 'text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700'
+              }`}
+            >
+              <ArrowPathRoundedSquareIcon className={`h-4 w-4 mr-2 ${isReposted ? 'text-green-500 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'}`} />
+              {isReposted ? 'Undo Repost' : 'Repost'}
+            </button>
+          </li>
+        </ul>
       )}
     </div>
   );

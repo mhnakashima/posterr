@@ -17,11 +17,13 @@ interface AvatarProps {
 
 const Avatar = ({ firstName = '', lastName = '', size = 'sm' }: AvatarProps) => {
   return (
-    <div
+    <span
+      role="img"
+      aria-label={`${firstName} ${lastName} avatar`}
       className={`${sizeClasses[size]} rounded-full bg-gray-300 dark:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 font-medium shrink-0`}
     >
       {getInitials(firstName, lastName)}
-    </div>
+    </span>
   );
 };
 

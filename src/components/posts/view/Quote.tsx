@@ -9,8 +9,8 @@ interface QuoteProps {
 
 const Quote = ({ post, onClickCallback, isDisabled }: QuoteProps) => {
   return (
-    <div className="mt-2 p-3 border border-gray-200 dark:border-gray-700 rounded-xl">
-      <div className="flex gap-2 items-center mb-1">
+    <blockquote className="mt-2 p-3 border border-gray-200 dark:border-gray-700 rounded-xl">
+      <footer className="flex gap-2 items-center mb-1">
         <button
           onClick={() => onClickCallback?.()}
           className={`shrink-0 ${isDisabled ? 'cursor-default' : 'cursor-pointer'}`}
@@ -22,14 +22,14 @@ const Quote = ({ post, onClickCallback, isDisabled }: QuoteProps) => {
             size="xs"
           />
         </button>
-        <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+        <cite className="text-sm font-semibold text-gray-900 dark:text-gray-100 not-italic">
           {post?.user?.firstName} {post?.user?.lastName}
-        </span>
-      </div>
+        </cite>
+      </footer>
       <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
         {post?.postBody}
       </p>
-    </div>
+    </blockquote>
   );
 };
 

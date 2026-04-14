@@ -8,7 +8,7 @@ interface ProfileHeaderProps {
 
 const ProfileHeader = ({ firstName, lastName, userName }: ProfileHeaderProps) => {
   return (
-    <div className="flex items-center">
+    <header className="flex items-center">
       <Avatar firstName={firstName || 'x'} lastName={lastName || 'x'} />
       <div className="ml-2">
         <h2 className="text-medium font-semibold">
@@ -16,7 +16,7 @@ const ProfileHeader = ({ firstName, lastName, userName }: ProfileHeaderProps) =>
         </h2>
       </div>
       <span className="hidden sm:inline-block ml-2">{userName}</span>
-    </div>
+    </header>
   );
 };
 

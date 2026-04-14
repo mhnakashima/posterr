@@ -8,7 +8,7 @@ const MessageInfo = ({
   messageInfoBodyText,
 }: MessageInfoProps) => {
   return (
-    <div
+    <aside
       className="my-4 bg-gray-100 dark:bg-gray-800 border-l-4 border-yellow-500 dark:border-yellow-600 text-yellow-700 dark:text-yellow-400 p-4 rounded-md"
       role="alert"
     >
@@ -27,7 +27,7 @@ const MessageInfo = ({
           <p className="text-sm">{messageInfoBodyText}</p>
         </div>
       </div>
-    </div>
+    </aside>
   );
 };
 

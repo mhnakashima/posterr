@@ -49,7 +49,7 @@ const PostList = () => {
   return (
     <>
       {postCollection?.length > 0 ? (
-        <div className="flex flex-col gap-px bg-gray-200/60 dark:bg-gray-800/60">
+        <ul aria-label="Posts feed" className="flex flex-col gap-px bg-gray-200/60 dark:bg-gray-800/60">
           {postCollection.map((post, i) => {
             const originalIndex = getOriginalIndex(post);
             const likes = post.likes ?? [];
@@ -60,7 +60,7 @@ const PostList = () => {
             const repostedByLabel = isReposted ? 'You reposted' : undefined;
 
             return (
-              <div key={i} className="bg-white dark:bg-gray-900">
+              <li key={i} className="bg-white dark:bg-gray-900 list-none">
                 <Post
                   post={post}
                   isDisabled={post?.user?.userId === profileInfo?.userId}
@@ -100,17 +100,17 @@ const PostList = () => {
                     }
                   />
                 </Post>
-              </div>
+              </li>
             );
           })}
-        </div>
+        </ul>
       ) : (
-        <div className="bg-white dark:bg-gray-900 p-4">
+        <section className="bg-white dark:bg-gray-900 p-4" aria-label="Empty feed">
           <MessageInfo
             messageInfoHeaderText="Information"
             messageInfoBodyText="There's no post available. What do you think to click on all posts and see what the community has been posting?"
           />
-        </div>
+        </section>
       )}
     </>
   );

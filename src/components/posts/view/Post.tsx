@@ -13,12 +13,12 @@ interface PostProps {
 
 const Post = ({ post, onClickCallback, isDisabled, children, repostedByLabel }: PostProps) => {
   return (
-    <div>
+    <article aria-label={`Post by ${post?.user?.firstName} ${post?.user?.lastName}`}>
       {repostedByLabel && (
-        <div className="flex items-center gap-1.5 px-4 pt-2 pl-14 text-xs text-gray-400 dark:text-gray-500">
+        <p className="flex items-center gap-1.5 px-4 pt-2 pl-14 text-xs text-gray-400 dark:text-gray-500">
           <ArrowPathRoundedSquareIcon className="h-3.5 w-3.5" />
           <span>{repostedByLabel}</span>
-        </div>
+        </p>
       )}
 
       <div className="flex gap-3 px-4 pt-3 pb-1">
@@ -34,7 +34,7 @@ const Post = ({ post, onClickCallback, isDisabled, children, repostedByLabel }: 
         </button>
 
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
+          <header className="flex items-center gap-2 mb-1">
             <button
               onClick={() => onClickCallback?.()}
               className={`text-sm font-semibold text-gray-900 dark:text-gray-100 hover:underline truncate ${isDisabled ? 'pointer-events-none' : ''}`}
@@ -59,7 +59,7 @@ const Post = ({ post, onClickCallback, isDisabled, children, repostedByLabel }: 
                 Quote
               </span>
             )}
-          </div>
+          </header>
 
           <p className="text-[15px] text-gray-800 dark:text-gray-200 leading-relaxed">
             {post?.postBody}
@@ -68,7 +68,7 @@ const Post = ({ post, onClickCallback, isDisabled, children, repostedByLabel }: 
           {children}
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 
