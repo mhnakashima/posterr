@@ -8,6 +8,7 @@ import { PostsProvider } from './context/PostsContext';
 import { UserProvider } from './context/UserContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { ROUTES } from './api/constants';
 import type { UserData } from './types';
 
@@ -38,6 +39,7 @@ const App = () => {
         </ModalProvider>
       </ThemeProvider>
       <Analytics />
+      <SpeedInsights />
     </main>
   );
 };
