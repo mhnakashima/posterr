@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { usePosts } from '../../context/PostsContext';
 import { useProfile } from '../../context/UserContext';
 import type { UserData } from '../../types';
+import { AVATAR_FALLBACK_INITIAL } from '../../api/constants';
 import FollowData from '../follow/FollowData';
 import ProfileHeader from './profileHeader/ProfileHeader';
 
@@ -29,9 +30,9 @@ const Profile = () => {
   return (
     <section className="flex flex-col gap-3 p-4">
       <ProfileHeader
-        firstName={profileInfo?.firstName || 'x'}
-        lastName={profileInfo?.lastName || 'x'}
-        userName={profileInfo?.userName || 'x'}
+        firstName={profileInfo?.firstName || AVATAR_FALLBACK_INITIAL}
+        lastName={profileInfo?.lastName || AVATAR_FALLBACK_INITIAL}
+        userName={profileInfo?.userName || AVATAR_FALLBACK_INITIAL}
       />
 
       <FollowData

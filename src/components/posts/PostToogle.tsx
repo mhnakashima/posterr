@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { usePosts } from '../../context/PostsContext';
+import { FeedCollection } from '../../types';
+import { ROUTES } from '../../api/constants';
 
 const tabs = [
-  { key: 'all', label: 'All Posts', to: '/all' },
-  { key: 'following', label: 'Following', to: '/following' },
-  { key: 'reposts', label: 'Reposts', to: '/reposts' },
+  { key: FeedCollection.All, label: 'All Posts', to: ROUTES.feed(FeedCollection.All) },
+  { key: FeedCollection.Following, label: 'Following', to: ROUTES.feed(FeedCollection.Following) },
+  { key: FeedCollection.Reposts, label: 'Reposts', to: ROUTES.feed(FeedCollection.Reposts) },
 ] as const;
 
 const PostToogle = () => {

@@ -7,6 +7,7 @@ import { ModalProvider } from './context/ModalContext';
 import { PostsProvider } from './context/PostsContext';
 import { UserProvider } from './context/UserContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { ROUTES } from './api/constants';
 import type { UserData } from './types';
 
 const App = () => {
@@ -25,8 +26,8 @@ const App = () => {
               <UserProvider user={user}>
                 <PostsProvider userProfile={user}>
                   <Routes>
-                    <Route path="/profile/:userId" element={<UserProfilePage />} />
-                    <Route path="/:collection" element={<PostPage />} />
+                    <Route path={ROUTES.profilePattern} element={<UserProfilePage />} />
+                    <Route path={ROUTES.collectionPattern} element={<PostPage />} />
                     <Route path="*" element={<PostPage />} />
                   </Routes>
                 </PostsProvider>

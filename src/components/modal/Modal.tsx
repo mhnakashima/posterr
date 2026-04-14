@@ -1,12 +1,13 @@
 import { createPortal } from 'react-dom';
 import { useModal } from '../../context/ModalContext';
+import { MODAL_ROOT_SELECTOR } from '../../api/constants';
 
 const Modal = () => {
   const { isModalOpen, closeModal, modalContent } = useModal();
 
   if (!isModalOpen) return null;
 
-  const modalRoot = document.querySelector('#modal-root');
+  const modalRoot = document.querySelector(MODAL_ROOT_SELECTOR);
   if (!modalRoot) return null;
 
   return createPortal(

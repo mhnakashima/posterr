@@ -2,11 +2,13 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Sidebar from '../Sidebar';
 import { renderWithProviders } from '../../../test/test-utils';
+import { DARK_CLASS_NAME, LABELS, ROUTES } from '../../../api/constants';
+import { FeedCollection } from '../../../types';
 
 describe('Sidebar', () => {
   beforeEach(() => {
     localStorage.clear();
-    document.documentElement.classList.remove('dark');
+    document.documentElement.classList.remove(DARK_CLASS_NAME);
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
       value: vi.fn().mockImplementation((query: string) => ({
@@ -34,45 +36,45 @@ describe('Sidebar', () => {
   it('renders theme toggle button with "Dark mode" title in light mode', () => {
     renderWithProviders(<Sidebar />);
 
-    expect(screen.getByTitle('Dark mode')).toBeInTheDocument();
+    expect(screen.getByTitle(LABELS.darkMode)).toBeInTheDocument();
   });
 
   it('shows "Light mode" title after toggling to dark', async () => {
     const user = userEvent.setup();
     renderWithProviders(<Sidebar />);
 
-    await user.click(screen.getByTitle('Dark mode'));
+    await user.click(screen.getByTitle(LABELS.darkMode));
 
-    expect(screen.getByTitle('Light mode')).toBeInTheDocument();
+    expect(screen.getByTitle(LABELS.lightMode)).toBeInTheDocument();
   });
 
   it('toggles dark class on documentElement when theme button clicked', async () => {
     const user = userEvent.setup();
     renderWithProviders(<Sidebar />);
 
-    expect(document.documentElement.classList.contains('dark')).toBe(false);
+    expect(document.documentElement.classList.contains(DARK_CLASS_NAME)).toBe(false);
 
-    await user.click(screen.getByTitle('Dark mode'));
+    await user.click(screen.getByTitle(LABELS.darkMode));
 
-    expect(document.documentElement.classList.contains('dark')).toBe(true);
+    expect(document.documentElement.classList.contains(DARK_CLASS_NAME)).toBe(true);
   });
 
   it('toggles back to light when clicked twice', async () => {
     const user = userEvent.setup();
     renderWithProviders(<Sidebar />);
 
-    await user.click(screen.getByTitle('Dark mode'));
-    expect(document.documentElement.classList.contains('dark')).toBe(true);
+    await user.click(screen.getByTitle(LABELS.darkMode));
+    expect(document.documentElement.classList.contains(DARK_CLASS_NAME)).toBe(true);
 
-    await user.click(screen.getByTitle('Light mode'));
-    expect(document.documentElement.classList.contains('dark')).toBe(false);
+    await user.click(screen.getByTitle(LABELS.lightMode));
+    expect(document.documentElement.classList.contains(DARK_CLASS_NAME)).toBe(false);
   });
 
   it('renders correct nav link hrefs', () => {
     renderWithProviders(<Sidebar />);
 
-    expect(screen.getByTitle('Home').closest('a')).toHaveAttribute('href', '/all');
-    expect(screen.getByTitle('Following').closest('a')).toHaveAttribute('href', '/following');
-    expect(screen.getByTitle('Reposts').closest('a')).toHaveAttribute('href', '/reposts');
+    expect(screen.getByTitle('Home').closest('a')).toHaveAttribute('href', ROUTES.feed(FeedCollection.All));
+    expect(screen.getByTitle('Following').closest('a')).toHaveAttribute('href', ROUTES.feed(FeedCollection.Following));
+    expect(screen.getByTitle('Reposts').closest('a')).toHaveAttribute('href', ROUTES.feed(FeedCollection.Reposts));
   });
 });

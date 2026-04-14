@@ -1,4 +1,5 @@
-import type { UserData } from '../../types';
+import { AvatarSize, FollowTab, type UserData } from '../../types';
+import { FOLLOWER_AVATAR_PREVIEW_COUNT } from '../../api/constants';
 import { useModal } from '../../context/ModalContext';
 import Avatar from '../avatar/Avatar';
 import FollowModal from './FollowModal';
@@ -20,14 +21,14 @@ const FollowData = ({
 }: FollowDataProps) => {
   const { openModal } = useModal();
 
-  const previewUsers = followers.slice(0, 3);
+  const previewUsers = followers.slice(0, FOLLOWER_AVATAR_PREVIEW_COUNT);
 
   const handleOpenFollowers = () => {
     openModal(
       <FollowModal
         followers={followers}
         following={following}
-        initialTab="followers"
+        initialTab={FollowTab.Followers}
       />,
     );
   };
@@ -37,7 +38,7 @@ const FollowData = ({
       <FollowModal
         followers={followers}
         following={following}
-        initialTab="following"
+        initialTab={FollowTab.Following}
       />,
     );
   };
@@ -59,7 +60,7 @@ const FollowData = ({
                 <Avatar
                   firstName={user.firstName}
                   lastName={user.lastName}
-                  size="xs"
+                  size={AvatarSize.XS}
                 />
               </div>
             ))}

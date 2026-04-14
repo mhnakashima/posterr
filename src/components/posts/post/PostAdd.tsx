@@ -1,6 +1,8 @@
 import { PaperAirplaneIcon } from '@heroicons/react/24/outline';
 import { type FormEvent, useCallback, useRef, useState } from 'react';
 import {
+  BLUR_COLLAPSE_DELAY_MS,
+  CHAR_LIMIT_WARNING_PERCENT,
   POSTERR_MAX_CHAR_POST_LENGTH,
   POSTERR_MIN_INPUT_LENGTH,
 } from '../../../api/constants';
@@ -8,7 +10,7 @@ import { usePosts } from '../../../context/PostsContext';
 import { useModal } from '../../../context/ModalContext';
 import { useProfile } from '../../../context/UserContext';
 import Avatar from '../../avatar/Avatar';
-import type { PostData, PostType } from '../../../types';
+import { PostType, type PostData } from '../../../types';
 
 interface PostAddProps {
   quotedPost?: PostData;
@@ -32,7 +34,7 @@ const PostAdd = ({ quotedPost, typeOfPost }: PostAddProps) => {
     const post: PostData = {
       postBody: body,
       user: profileInfo,
-      typeOfPost: typeOfPost || 'post',
+      typeOfPost: typeOfPost || PostType.Post,
       quotedPost,
     };
 
@@ -53,7 +55,7 @@ const PostAdd = ({ quotedPost, typeOfPost }: PostAddProps) => {
       ) {
         setIsFocused(false);
       }
-    }, 150);
+    }, BLUR_COLLAPSE_DELAY_MS);
   }, [body]);
 
   const charPercent = Math.floor(
@@ -81,7 +83,7 @@ const PostAdd = ({ quotedPost, typeOfPost }: PostAddProps) => {
               onFocus={() => setIsFocused(true)}
               onBlur={handleBlur}
               placeholder={
-                typeOfPost === 'quote' ? 'Add a comment...' : "What's new?"
+                typeOfPost === PostType.Quote ? 'Add a comment...' : "What's new?"
               }
             />
           </div>
@@ -106,7 +108,7 @@ const PostAdd = ({ quotedPost, typeOfPost }: PostAddProps) => {
             <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-1">
               <div
                 className={`${
-                  charPercent > 95 ? 'bg-red-500' : 'bg-blue-500'
+                  charPercent > CHAR_LIMIT_WARNING_PERCENT ? 'bg-red-500' : 'bg-blue-500'
                 } h-1 rounded-full transition-all duration-150`}
                 style={{ width: `${charPercent}%` }}
               />
@@ -116,7 +118,7 @@ const PostAdd = ({ quotedPost, typeOfPost }: PostAddProps) => {
           <button
             type="submit"
             disabled={
-              body.length < 3 || body.length > POSTERR_MAX_CHAR_POST_LENGTH
+              body.length < POSTERR_MIN_INPUT_LENGTH || body.length > POSTERR_MAX_CHAR_POST_LENGTH
             }
             className={`${
               body.length < POSTERR_MIN_INPUT_LENGTH ||

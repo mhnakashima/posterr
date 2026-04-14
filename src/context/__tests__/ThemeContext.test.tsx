@@ -1,8 +1,12 @@
-import { render, screen, act } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider, useTheme } from '../ThemeContext';
-
-const STORAGE_KEY = 'posterr-theme';
+import { Theme } from '../../types';
+import {
+  DARK_CLASS_NAME,
+  PREFERS_DARK_MEDIA_QUERY,
+  THEME_STORAGE_KEY,
+} from '../../api/constants';
 
 const ThemeConsumer = () => {
   const { theme, toggleTheme } = useTheme();
@@ -17,7 +21,7 @@ const ThemeConsumer = () => {
 describe('ThemeContext', () => {
   beforeEach(() => {
     localStorage.clear();
-    document.documentElement.classList.remove('dark');
+    document.documentElement.classList.remove(DARK_CLASS_NAME);
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
       value: vi.fn().mockImplementation((query: string) => ({
@@ -40,15 +44,15 @@ describe('ThemeContext', () => {
       </ThemeProvider>,
     );
 
-    expect(screen.getByTestId('theme-value').textContent).toBe('light');
-    expect(document.documentElement.classList.contains('dark')).toBe(false);
+    expect(screen.getByTestId('theme-value').textContent).toBe(Theme.Light);
+    expect(document.documentElement.classList.contains(DARK_CLASS_NAME)).toBe(false);
   });
 
   it('defaults to dark when OS prefers dark and nothing stored', () => {
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
       value: vi.fn().mockImplementation((query: string) => ({
-        matches: query === '(prefers-color-scheme: dark)',
+        matches: query === PREFERS_DARK_MEDIA_QUERY,
         media: query,
         onchange: null,
         addListener: vi.fn(),
@@ -65,12 +69,12 @@ describe('ThemeContext', () => {
       </ThemeProvider>,
     );
 
-    expect(screen.getByTestId('theme-value').textContent).toBe('dark');
-    expect(document.documentElement.classList.contains('dark')).toBe(true);
+    expect(screen.getByTestId('theme-value').textContent).toBe(Theme.Dark);
+    expect(document.documentElement.classList.contains(DARK_CLASS_NAME)).toBe(true);
   });
 
   it('reads stored "dark" from localStorage', () => {
-    localStorage.setItem(STORAGE_KEY, 'dark');
+    localStorage.setItem(THEME_STORAGE_KEY, Theme.Dark);
 
     render(
       <ThemeProvider>
@@ -78,12 +82,12 @@ describe('ThemeContext', () => {
       </ThemeProvider>,
     );
 
-    expect(screen.getByTestId('theme-value').textContent).toBe('dark');
-    expect(document.documentElement.classList.contains('dark')).toBe(true);
+    expect(screen.getByTestId('theme-value').textContent).toBe(Theme.Dark);
+    expect(document.documentElement.classList.contains(DARK_CLASS_NAME)).toBe(true);
   });
 
   it('reads stored "light" from localStorage', () => {
-    localStorage.setItem(STORAGE_KEY, 'light');
+    localStorage.setItem(THEME_STORAGE_KEY, Theme.Light);
 
     render(
       <ThemeProvider>
@@ -91,12 +95,12 @@ describe('ThemeContext', () => {
       </ThemeProvider>,
     );
 
-    expect(screen.getByTestId('theme-value').textContent).toBe('light');
-    expect(document.documentElement.classList.contains('dark')).toBe(false);
+    expect(screen.getByTestId('theme-value').textContent).toBe(Theme.Light);
+    expect(document.documentElement.classList.contains(DARK_CLASS_NAME)).toBe(false);
   });
 
   it('ignores invalid localStorage values and falls back to OS preference', () => {
-    localStorage.setItem(STORAGE_KEY, 'invalid');
+    localStorage.setItem(THEME_STORAGE_KEY, 'invalid');
 
     render(
       <ThemeProvider>
@@ -104,7 +108,7 @@ describe('ThemeContext', () => {
       </ThemeProvider>,
     );
 
-    expect(screen.getByTestId('theme-value').textContent).toBe('light');
+    expect(screen.getByTestId('theme-value').textContent).toBe(Theme.Light);
   });
 
   it('toggles from light to dark', async () => {
@@ -116,17 +120,17 @@ describe('ThemeContext', () => {
       </ThemeProvider>,
     );
 
-    expect(screen.getByTestId('theme-value').textContent).toBe('light');
+    expect(screen.getByTestId('theme-value').textContent).toBe(Theme.Light);
 
     await user.click(screen.getByRole('button', { name: /toggle/i }));
 
-    expect(screen.getByTestId('theme-value').textContent).toBe('dark');
-    expect(document.documentElement.classList.contains('dark')).toBe(true);
-    expect(localStorage.getItem(STORAGE_KEY)).toBe('dark');
+    expect(screen.getByTestId('theme-value').textContent).toBe(Theme.Dark);
+    expect(document.documentElement.classList.contains(DARK_CLASS_NAME)).toBe(true);
+    expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe(Theme.Dark);
   });
 
   it('toggles from dark to light', async () => {
-    localStorage.setItem(STORAGE_KEY, 'dark');
+    localStorage.setItem(THEME_STORAGE_KEY, Theme.Dark);
     const user = userEvent.setup();
 
     render(
@@ -135,13 +139,13 @@ describe('ThemeContext', () => {
       </ThemeProvider>,
     );
 
-    expect(screen.getByTestId('theme-value').textContent).toBe('dark');
+    expect(screen.getByTestId('theme-value').textContent).toBe(Theme.Dark);
 
     await user.click(screen.getByRole('button', { name: /toggle/i }));
 
-    expect(screen.getByTestId('theme-value').textContent).toBe('light');
-    expect(document.documentElement.classList.contains('dark')).toBe(false);
-    expect(localStorage.getItem(STORAGE_KEY)).toBe('light');
+    expect(screen.getByTestId('theme-value').textContent).toBe(Theme.Light);
+    expect(document.documentElement.classList.contains(DARK_CLASS_NAME)).toBe(false);
+    expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe(Theme.Light);
   });
 
   it('persists theme across multiple toggles', async () => {
@@ -154,13 +158,13 @@ describe('ThemeContext', () => {
     );
 
     await user.click(screen.getByRole('button', { name: /toggle/i }));
-    expect(localStorage.getItem(STORAGE_KEY)).toBe('dark');
+    expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe(Theme.Dark);
 
     await user.click(screen.getByRole('button', { name: /toggle/i }));
-    expect(localStorage.getItem(STORAGE_KEY)).toBe('light');
+    expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe(Theme.Light);
 
     await user.click(screen.getByRole('button', { name: /toggle/i }));
-    expect(localStorage.getItem(STORAGE_KEY)).toBe('dark');
+    expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe(Theme.Dark);
   });
 
   it('throws when useTheme is used outside ThemeProvider', () => {

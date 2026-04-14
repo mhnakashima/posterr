@@ -1,4 +1,5 @@
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { LABELS } from '../../api/constants';
 
 interface FollowButtonProps {
   isFollowing?: boolean;
@@ -18,12 +19,12 @@ const FollowButton = ({ isFollowing, onClickFollowUser }: FollowButtonProps) => 
       {!isFollowing ? (
         <div className="flex items-center text-white">
           <PlusIcon className="w-4 h-4" />
-          <span className="ml-2">Follow</span>
+          <span className="ml-2">{LABELS.follow}</span>
         </div>
       ) : (
         <div className="flex items-center text-white">
           <MinusIcon className="w-4 h-4" />
-          <span className="ml-2">Unfollow</span>
+          <span className="ml-2">{LABELS.unfollow}</span>
         </div>
       )}
     </button>

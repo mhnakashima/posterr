@@ -1,12 +1,11 @@
 import { getInitials } from '../../utils/utils';
-
-type AvatarSize = 'xs' | 'sm' | 'md' | 'lg';
+import { AvatarSize } from '../../types';
 
 const sizeClasses: Record<AvatarSize, string> = {
-  xs: 'w-6 h-6 text-[10px]',
-  sm: 'w-8 h-8 text-sm',
-  md: 'w-12 h-12 text-lg',
-  lg: 'w-16 h-16 text-xl',
+  [AvatarSize.XS]: 'w-6 h-6 text-[10px]',
+  [AvatarSize.SM]: 'w-8 h-8 text-sm',
+  [AvatarSize.MD]: 'w-12 h-12 text-lg',
+  [AvatarSize.LG]: 'w-16 h-16 text-xl',
 };
 
 interface AvatarProps {
@@ -15,7 +14,7 @@ interface AvatarProps {
   size?: AvatarSize;
 }
 
-const Avatar = ({ firstName = '', lastName = '', size = 'sm' }: AvatarProps) => {
+const Avatar = ({ firstName = '', lastName = '', size = AvatarSize.SM }: AvatarProps) => {
   return (
     <span
       role="img"

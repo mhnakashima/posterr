@@ -1,6 +1,7 @@
 import { ArrowPathRoundedSquareIcon } from '@heroicons/react/24/outline';
 import Avatar from '../../avatar/Avatar';
-import type { PostData } from '../../../types';
+import { PostType, type PostData } from '../../../types';
+import { AVATAR_FALLBACK_INITIAL } from '../../../api/constants';
 import type { ReactNode } from 'react';
 
 interface PostProps {
@@ -28,8 +29,8 @@ const Post = ({ post, onClickCallback, isDisabled, children, repostedByLabel }: 
           disabled={isDisabled}
         >
           <Avatar
-            firstName={post?.user?.firstName?.charAt(0) || 'X'}
-            lastName={post?.user?.lastName?.charAt(0) || 'X'}
+            firstName={post?.user?.firstName?.charAt(0) || AVATAR_FALLBACK_INITIAL}
+            lastName={post?.user?.lastName?.charAt(0) || AVATAR_FALLBACK_INITIAL}
           />
         </button>
 
@@ -53,7 +54,7 @@ const Post = ({ post, onClickCallback, isDisabled, children, repostedByLabel }: 
               </span>
             )}
 
-            {post?.typeOfPost === 'quote' && (
+            {post?.typeOfPost === PostType.Quote && (
               <span className="ml-auto shrink-0 flex items-center gap-1 text-[11px] font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950 px-2 py-0.5 rounded-full">
                 <ArrowPathRoundedSquareIcon className="w-3 h-3" />
                 Quote

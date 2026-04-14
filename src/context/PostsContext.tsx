@@ -8,12 +8,12 @@ import {
   type ReactNode,
 } from 'react';
 import { POSTERR_LOCAL_STORAGE_KEY } from '../api/constants';
-import type { PostData, UserData } from '../types';
+import { FeedCollection, type PostData, type UserData } from '../types';
 
 interface PostsContextValue {
   posts: PostData[];
   quotedPost: PostData | undefined;
-  collection: string;
+  collection: FeedCollection;
   onAddPost: (post: PostData) => void;
   onAddQuotedPost: (post: PostData) => void;
   onClearPosts: () => void;
@@ -22,7 +22,7 @@ interface PostsContextValue {
   onToggleRepost: (postIndex: number, userId: string) => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
-  setCollection: (collection: string) => void;
+  setCollection: (collection: FeedCollection) => void;
 }
 
 const PostsContext = createContext<PostsContextValue | undefined>(undefined);
@@ -34,7 +34,7 @@ interface PostsProviderProps {
 
 const PostsProvider = ({ userProfile, children }: PostsProviderProps) => {
   const [posts, setPosts] = useState<PostData[]>([]);
-  const [collection, setCollection] = useState('all');
+  const [collection, setCollection] = useState<FeedCollection>(FeedCollection.All);
   const [quotedPost, setQuotedPost] = useState<PostData | undefined>(undefined);
   const [user] = useState<UserData>(userProfile);
   const [searchQuery, setSearchQuery] = useState('');

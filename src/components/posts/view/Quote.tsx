@@ -1,5 +1,6 @@
 import Avatar from '../../avatar/Avatar';
-import type { PostData } from '../../../types';
+import { AvatarSize, type PostData } from '../../../types';
+import { AVATAR_FALLBACK_INITIAL } from '../../../api/constants';
 
 interface QuoteProps {
   post: PostData;
@@ -17,9 +18,9 @@ const Quote = ({ post, onClickCallback, isDisabled }: QuoteProps) => {
           disabled={isDisabled}
         >
           <Avatar
-            firstName={post?.user?.firstName?.charAt(0) || 'X'}
-            lastName={post?.user?.lastName?.charAt(0) || 'X'}
-            size="xs"
+            firstName={post?.user?.firstName?.charAt(0) || AVATAR_FALLBACK_INITIAL}
+            lastName={post?.user?.lastName?.charAt(0) || AVATAR_FALLBACK_INITIAL}
+            size={AvatarSize.XS}
           />
         </button>
         <cite className="text-sm font-semibold text-gray-900 dark:text-gray-100 not-italic">

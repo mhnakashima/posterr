@@ -5,6 +5,7 @@ import { PostsProvider } from '../context/PostsContext';
 import { UserProvider } from '../context/UserContext';
 import { ModalProvider } from '../context/ModalContext';
 import type { UserData } from '../types';
+import { ROUTES } from '../api/constants';
 import type { ReactElement, ReactNode } from 'react';
 
 const mockUser: UserData = {
@@ -24,7 +25,7 @@ interface WrapperOptions {
   user?: UserData;
 }
 
-const createWrapper = ({ initialRoute = '/all', user = mockUser }: WrapperOptions = {}) => {
+const createWrapper = ({ initialRoute = ROUTES.home, user = mockUser }: WrapperOptions = {}) => {
   return ({ children }: { children: ReactNode }) => (
     <MemoryRouter initialEntries={[initialRoute]}>
       <ThemeProvider>

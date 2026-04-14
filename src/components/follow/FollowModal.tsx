@@ -1,42 +1,41 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { UserData } from '../../types';
+import { FollowTab, type UserData } from '../../types';
+import { ROUTES } from '../../api/constants';
 import Avatar from '../avatar/Avatar';
 import { useModal } from '../../context/ModalContext';
-
-type Tab = 'followers' | 'following';
 
 interface FollowModalProps {
   followers: UserData[];
   following: UserData[];
-  initialTab?: Tab;
+  initialTab?: FollowTab;
 }
 
 const FollowModal = ({
   followers,
   following,
-  initialTab = 'followers',
+  initialTab = FollowTab.Followers,
 }: FollowModalProps) => {
-  const [activeTab, setActiveTab] = useState<Tab>(initialTab);
+  const [activeTab, setActiveTab] = useState<FollowTab>(initialTab);
   const navigate = useNavigate();
   const { closeModal } = useModal();
 
-  const activeList = activeTab === 'followers' ? followers : following;
+  const activeList = activeTab === FollowTab.Followers ? followers : following;
 
   const handleUserClick = (userId: string) => {
     closeModal();
-    navigate(`/profile/${userId}`);
+    navigate(ROUTES.profile(userId));
   };
 
   return (
     <section aria-label="Followers and following">
       <nav aria-label="User list tabs" className="flex border-b border-gray-200 dark:border-gray-700">
         <button
-          onClick={() => setActiveTab('followers')}
-          aria-selected={activeTab === 'followers'}
+          onClick={() => setActiveTab(FollowTab.Followers)}
+          aria-selected={activeTab === FollowTab.Followers}
           role="tab"
           className={`flex-1 py-3 text-sm font-semibold text-center transition-colors border-b-2 ${
-            activeTab === 'followers'
+            activeTab === FollowTab.Followers
               ? 'border-blue-500 text-blue-500'
               : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
           }`}
@@ -44,11 +43,11 @@ const FollowModal = ({
           Followers ({followers.length})
         </button>
         <button
-          onClick={() => setActiveTab('following')}
-          aria-selected={activeTab === 'following'}
+          onClick={() => setActiveTab(FollowTab.Following)}
+          aria-selected={activeTab === FollowTab.Following}
           role="tab"
           className={`flex-1 py-3 text-sm font-semibold text-center transition-colors border-b-2 ${
-            activeTab === 'following'
+            activeTab === FollowTab.Following
               ? 'border-blue-500 text-blue-500'
               : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
           }`}

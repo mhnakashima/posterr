@@ -11,21 +11,23 @@ import {
 import { usePosts } from '../../context/PostsContext';
 import { useProfile } from '../../context/UserContext';
 import { useTheme } from '../../context/ThemeContext';
+import { FeedCollection, Theme } from '../../types';
+import { LABELS, ROUTES } from '../../api/constants';
+
+const navItems = [
+  { key: FeedCollection.All, to: ROUTES.feed(FeedCollection.All), icon: HomeIcon, title: 'Home' },
+  { key: FeedCollection.Following, to: ROUTES.feed(FeedCollection.Following), icon: UserGroupIcon, title: 'Following' },
+  { key: FeedCollection.Reposts, to: ROUTES.feed(FeedCollection.Reposts), icon: ArrowPathRoundedSquareIcon, title: 'Reposts' },
+] as const;
 
 const Sidebar = () => {
   const { collection } = usePosts();
   const { profileInfo } = useProfile();
   const { theme, toggleTheme } = useTheme();
 
-  const navItems = [
-    { to: '/all', key: 'all', icon: HomeIcon, title: 'Home' },
-    { to: '/following', key: 'following', icon: UserGroupIcon, title: 'Following' },
-    { to: '/reposts', key: 'reposts', icon: ArrowPathRoundedSquareIcon, title: 'Reposts' },
-  ];
-
   return (
     <aside className="hidden lg:flex lg:flex-col lg:items-center lg:fixed lg:top-0 lg:left-0 lg:h-screen lg:w-16 lg:border-r lg:border-gray-200/60 dark:lg:border-gray-800 bg-white dark:bg-gray-950 z-40 py-4">
-      <Link to="/all" className="mb-8">
+      <Link to={ROUTES.home} className="mb-8">
         <ChatBubbleLeftRightIcon className="h-7 w-7 text-blue-500" />
       </Link>
 
@@ -46,7 +48,7 @@ const Sidebar = () => {
         ))}
 
         <Link
-          to={`/profile/${profileInfo.userId}`}
+          to={ROUTES.profile(profileInfo.userId)}
           className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
           title="Profile"
         >
@@ -57,9 +59,9 @@ const Sidebar = () => {
       <button
         onClick={toggleTheme}
         className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
-        title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+        title={theme === Theme.Dark ? LABELS.lightMode : LABELS.darkMode}
       >
-        {theme === 'dark' ? (
+        {theme === Theme.Dark ? (
           <SunIcon className="h-6 w-6" />
         ) : (
           <MoonIcon className="h-6 w-6" />

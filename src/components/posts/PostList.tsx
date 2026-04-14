@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useModal } from '../../context/ModalContext';
 import { usePosts } from '../../context/PostsContext';
 import { useProfile } from '../../context/UserContext';
-import type { PostData } from '../../types';
+import { FeedCollection, PostType, type PostData } from '../../types';
+import { LABELS, ROUTES } from '../../api/constants';
 import PostToolbar from './PostToolbar';
 import Post from './view/Post';
 import Quote from './view/Quote';
@@ -19,9 +20,9 @@ const PostList = () => {
 
   useEffect(() => {
     let updatedPosts: PostData[];
-    if (collection === 'following') {
+    if (collection === FeedCollection.Following) {
       updatedPosts = posts.filter((post) => post.user?.isFollowing);
-    } else if (collection === 'reposts') {
+    } else if (collection === FeedCollection.Reposts) {
       updatedPosts = posts.filter((post) =>
         post.repostedBy?.includes(profileInfo.userId),
       );
@@ -34,7 +35,7 @@ const PostList = () => {
 
   const goToProfile = useCallback(
     (userId: string) => {
-      navigate(`/profile/${userId}`);
+      navigate(ROUTES.profile(userId));
     },
     [navigate],
   );
@@ -57,7 +58,7 @@ const PostList = () => {
             const repostedBy = post.repostedBy ?? [];
             const isReposted = repostedBy.includes(profileInfo.userId);
 
-            const repostedByLabel = isReposted ? 'You reposted' : undefined;
+            const repostedByLabel = isReposted ? LABELS.repostedBySelf : undefined;
 
             return (
               <li key={i} className="bg-white dark:bg-gray-900 list-none">
@@ -89,9 +90,9 @@ const PostList = () => {
                           post={{
                             postBody: post.postBody,
                             user: post?.user,
-                            typeOfPost: 'quote',
+                            typeOfPost: PostType.Quote,
                           }}
-                          typeOfPost="quote"
+                          typeOfPost={PostType.Quote}
                         />,
                       );
                     }}
@@ -107,8 +108,8 @@ const PostList = () => {
       ) : (
         <section className="bg-white dark:bg-gray-900 p-4" aria-label="Empty feed">
           <MessageInfo
-            messageInfoHeaderText="Information"
-            messageInfoBodyText="There's no post available. What do you think to click on all posts and see what the community has been posting?"
+            messageInfoHeaderText={LABELS.emptyFeedTitle}
+            messageInfoBodyText={LABELS.emptyFeedMessage}
           />
         </section>
       )}

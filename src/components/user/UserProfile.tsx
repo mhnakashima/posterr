@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { usePosts } from '../../context/PostsContext';
 import { useProfile } from '../../context/UserContext';
 import type { PostData, UserData } from '../../types';
+import { AVATAR_FALLBACK_INITIAL, LABELS, ROUTES } from '../../api/constants';
 import FollowButton from '../follow/FollowButton';
 import FollowData from '../follow/FollowData';
 import PostToolbar from '../posts/PostToolbar';
@@ -30,9 +31,9 @@ const UserProfile = ({ userData }: UserProfileProps) => {
       <div className="px-4">
         <div className="flex items-center">
           <ProfileHeader
-            firstName={userData?.firstName || 'x'}
-            lastName={userData?.lastName || 'x'}
-            userName={userData?.userName || 'x'}
+            firstName={userData?.firstName || AVATAR_FALLBACK_INITIAL}
+            lastName={userData?.lastName || AVATAR_FALLBACK_INITIAL}
+            userName={userData?.userName || AVATAR_FALLBACK_INITIAL}
           />
 
           <div className="ml-auto">
@@ -78,7 +79,7 @@ const UserProfile = ({ userData }: UserProfileProps) => {
                   <Post
                     post={fullPost}
                     isDisabled={true}
-                    repostedByLabel={isReposted ? 'You reposted' : undefined}
+                    repostedByLabel={isReposted ? LABELS.repostedBySelf : undefined}
                   >
                     <PostToolbar
                       likeCount={likes.length}
@@ -89,7 +90,7 @@ const UserProfile = ({ userData }: UserProfileProps) => {
                       isReposted={isReposted}
                       repostCount={repostedBy.length}
                       quotePostCallback={() => {
-                        navigate(`/profile/${userData.userId}`);
+                        navigate(ROUTES.profile(userData.userId));
                       }}
                       repostCallback={() => handleRepost(originalIndex)}
                     />

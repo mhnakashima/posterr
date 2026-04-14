@@ -6,24 +6,26 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-
-type Theme = 'light' | 'dark';
+import { Theme } from '../types';
+import {
+  DARK_CLASS_NAME,
+  PREFERS_DARK_MEDIA_QUERY,
+  THEME_STORAGE_KEY,
+} from '../api/constants';
 
 interface ThemeContextValue {
   theme: Theme;
   toggleTheme: () => void;
 }
 
-const STORAGE_KEY = 'posterr-theme';
-
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 const getInitialTheme = (): Theme => {
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored === 'dark' || stored === 'light') return stored;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
-    ? 'dark'
-    : 'light';
+  const stored = localStorage.getItem(THEME_STORAGE_KEY);
+  if (stored === Theme.Dark || stored === Theme.Light) return stored;
+  return window.matchMedia(PREFERS_DARK_MEDIA_QUERY).matches
+    ? Theme.Dark
+    : Theme.Light;
 };
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
@@ -31,16 +33,16 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
+    if (theme === Theme.Dark) {
+      root.classList.add(DARK_CLASS_NAME);
     } else {
-      root.classList.remove('dark');
+      root.classList.remove(DARK_CLASS_NAME);
     }
-    localStorage.setItem(STORAGE_KEY, theme);
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    setTheme((prev) => (prev === Theme.Dark ? Theme.Light : Theme.Dark));
   }, []);
 
   return (

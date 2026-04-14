@@ -3,6 +3,7 @@ import {
   ArrowPathRoundedSquareIcon,
   ChatBubbleLeftRightIcon,
 } from '@heroicons/react/24/outline';
+import { LABELS } from '../../api/constants';
 
 interface RepostMenuProps {
   onQuotePost: () => void;
@@ -53,7 +54,7 @@ const RepostMenu = ({ onQuotePost, onRepost, isReposted = false }: RepostMenuPro
               className="flex items-center w-full px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
               <ChatBubbleLeftRightIcon className="h-4 w-4 mr-2 text-gray-500 dark:text-gray-400" />
-              Quote Post
+              {LABELS.quotePost}
             </button>
           </li>
           <li role="none">
@@ -70,7 +71,7 @@ const RepostMenu = ({ onQuotePost, onRepost, isReposted = false }: RepostMenuPro
               }`}
             >
               <ArrowPathRoundedSquareIcon className={`h-4 w-4 mr-2 ${isReposted ? 'text-green-500 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'}`} />
-              {isReposted ? 'Undo Repost' : 'Repost'}
+              {isReposted ? LABELS.undoRepost : LABELS.repost}
             </button>
           </li>
         </ul>

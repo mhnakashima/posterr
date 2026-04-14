@@ -13,7 +13,8 @@ import { usePosts } from '../context/PostsContext';
 import { useProfile } from '../context/UserContext';
 import { useModal } from '../context/ModalContext';
 import PostQuote from '../components/posts/post/PostQuote';
-import type { PostData, UserData } from '../types';
+import { AvatarSize, PostType, type PostData, type UserData } from '../types';
+import { LABELS, ROUTES } from '../api/constants';
 
 const UserProfilePage = () => {
   const { userId } = useParams();
@@ -35,9 +36,9 @@ const UserProfilePage = () => {
         <Header />
         <main className="lg:ml-16 pb-16 lg:pb-0">
           <section className="max-w-[600px] mx-auto bg-white dark:bg-gray-900 p-8 text-center text-gray-500 dark:text-gray-400" aria-label="User not found">
-            <p>User not found.</p>
+            <p>{LABELS.userNotFound}</p>
             <button
-              onClick={() => navigate('/all')}
+              onClick={() => navigate(ROUTES.home)}
               className="block mx-auto mt-4 text-blue-500 hover:underline"
             >
               Go back
@@ -118,7 +119,7 @@ const UserProfilePage = () => {
                 <Avatar
                   firstName={userData.firstName}
                   lastName={userData.lastName}
-                  size="lg"
+                  size={AvatarSize.LG}
                 />
                 <div>
                   <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
@@ -165,7 +166,7 @@ const UserProfilePage = () => {
                           user: userData,
                         }}
                         isDisabled={true}
-                        repostedByLabel={isReposted ? 'You reposted' : undefined}
+                        repostedByLabel={isReposted ? LABELS.repostedBySelf : undefined}
                       >
                         <PostToolbar
                           likeCount={likes.length}
@@ -181,9 +182,9 @@ const UserProfilePage = () => {
                                 post={{
                                   postBody: post.postBody,
                                   user: userData,
-                                  typeOfPost: 'quote',
+                                  typeOfPost: PostType.Quote,
                                 }}
-                                typeOfPost="quote"
+                                typeOfPost={PostType.Quote}
                               />,
                             );
                           }}
@@ -196,7 +197,7 @@ const UserProfilePage = () => {
               </ul>
             ) : (
               <p className="bg-white dark:bg-gray-900 p-8 text-center text-gray-400 dark:text-gray-500">
-                No posts yet.
+                {LABELS.noPostsYet}
               </p>
             )}
           </section>

@@ -1,10 +1,10 @@
-import type { PostData } from '../../../types';
+import { type PostData, type PostType } from '../../../types';
 import Quote from '../view/Quote';
 import PostAdd from './PostAdd';
 
 interface PostQuoteProps {
   post: PostData;
-  typeOfPost?: string;
+  typeOfPost?: PostType;
 }
 
 const PostQuote = ({ post }: PostQuoteProps) => {

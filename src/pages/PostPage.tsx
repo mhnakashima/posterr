@@ -7,24 +7,29 @@ import Sidebar from '../components/sidebar/Sidebar';
 import BottomNav from '../components/bottomNav/BottomNav';
 import { usePosts } from '../context/PostsContext';
 import PostContainer from '../features/PostContainer';
-import type { PostData } from '../types';
+import { FeedCollection, type PostData } from '../types';
+
+const VALID_COLLECTIONS = new Set<string>(Object.values(FeedCollection));
+
+const parseFeedCollection = (param?: string): FeedCollection =>
+  param && VALID_COLLECTIONS.has(param)
+    ? (param as FeedCollection)
+    : FeedCollection.All;
 
 const PostPage = () => {
-  const { collection } = useParams();
+  const { collection: collectionParam } = useParams();
   const { posts, quotedPost, setCollection } = usePosts();
   const [, setUserQuotedPost] = useState<PostData | undefined>();
 
   useEffect(() => {
-    if (collection) {
-      setCollection(collection);
-    }
+    setCollection(parseFeedCollection(collectionParam));
 
     if (quotedPost) {
       setUserQuotedPost(quotedPost);
     } else {
       setUserQuotedPost(undefined);
     }
-  }, [posts, quotedPost, collection, setCollection]);
+  }, [posts, quotedPost, collectionParam, setCollection]);
 
   return (
     <div className="min-h-screen w-full bg-gray-50 dark:bg-gray-950">

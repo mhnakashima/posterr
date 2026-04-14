@@ -3,7 +3,7 @@ import {
   POSTERR_LOCAL_STORAGE_KEY,
   POSTERR_NUM_OF_POSTS,
 } from '../api/constants';
-import type { PostData, UserData } from '../types';
+import { PostType, type PostData, type UserData } from '../types';
 
 function createFakeConfiguration(): UserData {
   const stored = window.localStorage.getItem(POSTERR_LOCAL_STORAGE_KEY);
@@ -44,7 +44,7 @@ const generateFirstUserData = (): UserData => {
         userName: '',
         posts: Array.from({ length: POSTERR_NUM_OF_POSTS }, () => ({
           postBody: faker.hacker.phrase(),
-          typeOfPost: 'post' as const,
+          typeOfPost: PostType.Post,
           user: {} as UserData,
         })),
       };
@@ -56,7 +56,7 @@ const generateFirstUserData = (): UserData => {
 
       return {
         postBody: faker.hacker.phrase(),
-        typeOfPost: 'post' as const,
+        typeOfPost: PostType.Post,
         user: postUser,
       };
     },
