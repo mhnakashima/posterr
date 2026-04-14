@@ -1,9 +1,7 @@
-import { User } from "./user";
+import type { UserData } from '../types';
 
-interface UserPosterrInfo {
-    joinedDate: Date;
-    followers: Array<User>;
-    following: Array<User>;
+export interface UserPosterrInfo {
+  joinedDate: Date;
+  followers: UserData[];
+  following: UserData[];
 }
-
-export { UserPosterrInfo };

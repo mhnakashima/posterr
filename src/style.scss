@@ -1,11 +1,8 @@
-@import "./assets/scss/tailwind.scss";
-@import "./assets/scss/_main.scss";
-@import "./assets/scss/_posts.scss";
-@import "./assets/scss/_userProfile.scss";
+@use "./assets/scss/tailwind.scss";
+@use "./assets/scss/main";
+@use "./assets/scss/posts";
+@use "./assets/scss/userProfile";
 
-/* 
-  General Rules
-*/
 * {
   padding: 0;
   margin: 0;
@@ -15,4 +12,3 @@
 *::placeholder {
   color: #999;
 }
-
