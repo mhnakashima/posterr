@@ -7,6 +7,7 @@ import { ModalProvider } from './context/ModalContext';
 import { PostsProvider } from './context/PostsContext';
 import { UserProvider } from './context/UserContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { Analytics } from '@vercel/analytics/react';
 import { ROUTES } from './api/constants';
 import type { UserData } from './types';
 
@@ -36,6 +37,7 @@ const App = () => {
           </BrowserRouter>
         </ModalProvider>
       </ThemeProvider>
+      <Analytics />
     </main>
   );
 };
