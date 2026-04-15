@@ -35,7 +35,7 @@ const RepostMenu = ({ onQuotePost, onRepost, isReposted = false }: RepostMenuPro
         className={`flex items-center justify-center p-1.5 rounded-full transition-colors ${
           isReposted
             ? 'text-green-500 hover:bg-green-50 dark:hover:bg-green-950'
-            : 'text-gray-400 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-600 dark:hover:text-gray-300'
+            : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-600 dark:hover:text-gray-300'
         }`}
         aria-label="Share options"
       >

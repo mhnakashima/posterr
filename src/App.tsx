@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import PostPage from './pages/PostPage';
-import UserProfilePage from './pages/UserProfilePage';
 import { createFakeConfiguration } from './utils/utils';
 import { ModalProvider } from './context/ModalContext';
 import { PostsProvider } from './context/PostsContext';
@@ -12,11 +10,20 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 import { ROUTES } from './api/constants';
 import type { UserData } from './types';
 
+const PostPage = lazy(() => import('./pages/PostPage'));
+const UserProfilePage = lazy(() => import('./pages/UserProfilePage'));
+
+const PageFallback = () => (
+  <div className="min-h-screen w-full bg-gray-50 dark:bg-gray-950 flex items-center justify-center">
+    <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+  </div>
+);
+
 const App = () => {
   const [user, setUser] = useState<UserData | undefined>(undefined);
 
   useEffect(() => {
-    setUser(createFakeConfiguration());
+    createFakeConfiguration().then(setUser);
   }, []);
 
   return (
@@ -27,11 +34,13 @@ const App = () => {
             {user && (
               <UserProvider user={user}>
                 <PostsProvider userProfile={user}>
-                  <Routes>
-                    <Route path={ROUTES.profilePattern} element={<UserProfilePage />} />
-                    <Route path={ROUTES.collectionPattern} element={<PostPage />} />
-                    <Route path="*" element={<PostPage />} />
-                  </Routes>
+                  <Suspense fallback={<PageFallback />}>
+                    <Routes>
+                      <Route path={ROUTES.profilePattern} element={<UserProfilePage />} />
+                      <Route path={ROUTES.collectionPattern} element={<PostPage />} />
+                      <Route path="*" element={<PostPage />} />
+                    </Routes>
+                  </Suspense>
                 </PostsProvider>
               </UserProvider>
             )}

@@ -28,7 +28,7 @@ const PostToolbar = ({
         className={`flex items-center gap-1 p-1.5 rounded-full transition-colors ${
           isLiked
             ? 'text-red-500 hover:bg-red-50 dark:hover:bg-red-950'
-            : 'text-gray-400 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-600 dark:hover:text-gray-300'
+            : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-600 dark:hover:text-gray-300'
         }`}
         aria-label={isLiked ? 'Unlike' : 'Like'}
       >
@@ -49,7 +49,7 @@ const PostToolbar = ({
           isReposted={isReposted}
         />
         {repostCount > 0 && (
-          <span className={`text-xs font-medium -ml-0.5 ${isReposted ? 'text-green-500' : 'text-gray-400 dark:text-gray-500'}`}>
+          <span className={`text-xs font-medium -ml-0.5 ${isReposted ? 'text-green-500' : 'text-gray-500 dark:text-gray-400'}`}>
             {repostCount}
           </span>
         )}

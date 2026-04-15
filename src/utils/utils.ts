@@ -1,18 +1,18 @@
-import { faker } from '@faker-js/faker';
 import {
   POSTERR_LOCAL_STORAGE_KEY,
   POSTERR_NUM_OF_POSTS,
 } from '../api/constants';
 import { PostType, type PostData, type UserData } from '../types';
 
-function createFakeConfiguration(): UserData {
+async function createFakeConfiguration(): Promise<UserData> {
   const stored = window.localStorage.getItem(POSTERR_LOCAL_STORAGE_KEY);
   if (stored) {
     const parsed = JSON.parse(stored) as UserData;
     if (parsed && parsed.userId) return parsed;
   }
 
-  const userData = generateFirstUserData();
+  const { faker } = await import('@faker-js/faker');
+  const userData = generateFirstUserData(faker);
   window.localStorage.setItem(
     POSTERR_LOCAL_STORAGE_KEY,
     JSON.stringify(userData),
@@ -20,7 +20,8 @@ function createFakeConfiguration(): UserData {
   return userData;
 }
 
-const generateFirstUserData = (): UserData => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const generateFirstUserData = (faker: any): UserData => {
   const user: UserData = {
     userId: faker.datatype.uuid(),
     firstName: faker.name.firstName(),

@@ -196,7 +196,7 @@ const UserProfilePage = () => {
                 })}
               </ul>
             ) : (
-              <p className="bg-white dark:bg-gray-900 p-8 text-center text-gray-400 dark:text-gray-500">
+              <p className="bg-white dark:bg-gray-900 p-8 text-center text-gray-500 dark:text-gray-400">
                 {LABELS.noPostsYet}
               </p>
             )}

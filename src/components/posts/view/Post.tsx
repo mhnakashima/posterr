@@ -16,7 +16,7 @@ const Post = ({ post, onClickCallback, isDisabled, children, repostedByLabel }: 
   return (
     <article aria-label={`Post by ${post?.user?.firstName} ${post?.user?.lastName}`}>
       {repostedByLabel && (
-        <p className="flex items-center gap-1.5 px-4 pt-2 pl-14 text-xs text-gray-400 dark:text-gray-500">
+        <p className="flex items-center gap-1.5 px-4 pt-2 pl-14 text-xs text-gray-500 dark:text-gray-400">
           <ArrowPathRoundedSquareIcon className="h-3.5 w-3.5" />
           <span>{repostedByLabel}</span>
         </p>
@@ -44,7 +44,7 @@ const Post = ({ post, onClickCallback, isDisabled, children, repostedByLabel }: 
               {post?.user?.firstName} {post?.user?.lastName}
             </button>
 
-            <span className="text-sm text-gray-400 dark:text-gray-500 truncate">
+            <span className="text-sm text-gray-500 dark:text-gray-400 truncate">
               {post?.user?.userName}
             </span>
 

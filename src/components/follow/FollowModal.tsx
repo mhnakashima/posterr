@@ -81,7 +81,7 @@ const FollowModal = ({
           ))}
         </ul>
       ) : (
-        <p className="px-4 py-8 text-sm text-gray-400 dark:text-gray-500 text-center">
+        <p className="px-4 py-8 text-sm text-gray-500 dark:text-gray-400 text-center">
           No {activeTab} yet.
         </p>
       )}
